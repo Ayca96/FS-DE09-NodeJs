@@ -71,36 +71,110 @@ OOP
 //todo   This keyword
 // icinde bulundugu objeyi ifade eder
 
-const Car = {
-     brand: 'Mercedes',
-     model: 'S500',
-     year: 2020,
-     isAutoGear: true,
-     colors: ['Blue', 'Black'],
-     engine:{
-     cylinderCounts:8,
-     hp:100,
-   },
-     startEngine: function(){
-         return 'engine started'
-     },
-     stopEngine: function(){
-       return 'engine stopped'
-   },
+// const Car = {
+//      brand: 'Mercedes',
+//      model: 'S500',
+//      year: 2020,
+//      isAutoGear: true,
+//      colors: ['Blue', 'Black'],
+//      engine:{
+//      cylinderCounts:8,
+//      hp:100,
+//    },
+//      startEngine: function(){
+//          return 'engine started'
+//      },
+//      stopEngine: function(){
+//        return 'engine stopped'
+//    },
 
-   detailFunction: function(){
-   // console.log(this);
-    return this.brand
+//    detailFunction: function(){
+//    // console.log(this);
+//     return this.brand
     
+// },
+
+// //! arrow Function global scope this i tanimiyor.
+// arrowMethod: () =>{
+//   return this
+// }
+  
+//  }
+
+//  console.log(Car.detailFunction());
+//  console.log(Car.arrowMethod());
+ 
+
+ //? Array destructing
+
+ const sampleArray=['val1','val2','val3','val4','val5'];
+//  const v1=sampleArray[0];
+//  const v2=sampleArray[1];
+//  const v3=sampleArray[2];
+//  const v4=sampleArray.slice(2,3);
+
+//  console.log(v1);
+//  console.log(v4);
+
+
+ const [v1,v2, ...vN]=sampleArray;
+ // rest operator  toplayici esitligin solunda oluyor
+ console.log(vN);
+
+
+ // spread operator dagitici esitligin saginda oluyor
+
+ const newArray = ['valx','valy',...sampleArray]
+ console.log(newArray);
+ 
+ 
+ const Car = {
+  brand: 'Mercedes',
+  model: 'S500',
+  year: 2020,
+  isAutoGear: true,
+  colors: ['Blue', 'Black'],
+  engine:{
+  cylinderCounts:8,
+  hp:100,
+},
+  startEngine: function(){
+      return 'engine started'
+  },
+  stopEngine: function(){
+    return 'engine stopped'
 },
 
-//! arrow Function global scope this i tanimiyor.
-arrowMethod: () =>{
-  return this
+detailFunction: function(){
+// console.log(this);
+ return this.brand
+ 
+}, //function expression
+
 }
-  
+
+// rest
+
+const {brand:marka,model,year, ...others}=Car // rest operatöründe objedeki siralamanin önemi yok.
+
+console.log(marka);
+console.log(year,marka,model,others);
+//=> rest operatörü, bir nesne veya dizi içindeki kalan elemanları veya özellikleri toplayarak yeni bir nesne veya dizi oluşturmanıza olanak tanır.
+
+// Mercedes
+// 2020 Mercedes S500 {
+//   isAutoGear: true,
+//   colors: [ 'Blue', 'Black' ],
+//   engine: { cylinderCounts: 8, hp: 100 },
+//   startEngine: [Function: startEngine],
+//   stopEngine: [Function: stopEngine],
+//   detailFunction: [Function: detailFunction]
+// }
+
+ const newCar={
+  ...Car,
+  oilType:'gas',
  }
 
- console.log(Car.detailFunction());
- console.log(Car.arrowMethod());
+ console.log(newCar);
  
