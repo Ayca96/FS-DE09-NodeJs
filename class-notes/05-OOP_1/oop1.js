@@ -171,10 +171,59 @@ console.log(year,marka,model,others);
 //   detailFunction: [Function: detailFunction]
 // }
 
- const newCar={
+
+// spread operatör
+ /* const newCar={
   ...Car,
   oilType:'gas',
  }
 
- console.log(newCar);
- 
+ console.log(newCar); */
+
+// object to Json
+
+// const jsonCar=JSON.stringify(Car)
+// console.log(jsonCar);
+// console.log(typeof jsonCar);
+// console.log(typeof Car);
+
+
+// // Json to object
+
+// const objCar=JSON.parse(jsonCar)
+// console.log(objCar);
+
+// // object to array 
+// const arrayKeys=Object.keys(Car)
+// console.log(arrayKeys);
+// const arrayValues=Object.values(Car)
+// console.log(arrayValues);
+// const arrayAll=Object.entries(Car)
+// console.log(arrayAll);
+
+
+// Construction  => constructor function (yapıcı fonksiyon) kullanarak nesneler (objeler) oluşturuyorsunuz. Yapıcı fonksiyonlar, belirli bir yapı ve özelliklere sahip yeni nesneler oluşturmak için kullanılır
+
+const constructionFunction=function(){
+  this.property='value'
+}
+
+const carConstruction=function(brand,model,year){
+  this.brand=brand,
+  this.model=model,
+  this.year=year,
+  this.startEngine= function(param){
+      return (param)
+  }
+}
+
+const newCar1=new carConstruction('Volswagen','passat',2024)
+// console.log(typeof newCar1, newCar1);
+ console.log(newCar1.startEngine('Tesla'));
+  
+
+const newCar2=new carConstruction('Audi','A4',2023)
+console.log(newCar2.startEngine('Mercedes'));
+
+
+
