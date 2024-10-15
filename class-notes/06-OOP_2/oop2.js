@@ -1,224 +1,275 @@
-'use strict'
+"use strict";
 
 /*
-
-OOP Classes
-
+    OOP Classes
 */
 
-//? Class Expression
+//? Class Expressions
 
-// const PascalCaseName = class {
-//   ...
-// }
+/*
+const PascalCaseName  = class {
 
-//? Class Decleration tercih edilen
+}
+*/
 
+//? Class Decleration (tercih edecegimiz)
+/*
 class PascalCaseName {
-  
- // propertyName // deger verilem zorunda degil undefined olur.
-  propertyName='value'
-  // method basina function yazilmaz.
-
-
-
-  methodName (){
-    return 'this is method'
+  //propertyName // undefined deger vermek zorunda degiliz
+  propertyName = "value";
+  // method basina function yazilmaz
+  methodName() {
+    return "this is a method";
   }
 }
 
-// class tan bir obje üretimine 'instance' denir
+// classtan nir obje üretirseniz ismi "instance"
 
-const NewInstance = new PascalCaseName() // yeni instance üretimi
+/*
+const NewInstance = new PascalCaseName(); // yeni instance üretme
 console.log(NewInstance);
-console.log(NewInstance.methodName ());
-
-
-//* constructor yapici
-
-// class Car{
-//   isRunning=false
-//   //brand='noname'
-//   constructor ( brand,model,year) {
-//     this.brand=brand,
-//     this.model=model,
-//     this.year=year
-//   }
-//   runEngine(){
-//     this.isRunning=true
-//     return this.isRunning
-
-//   }
-// }
-
-// const Opel=new Car('Opel','Corsa','2020')
-// console.log(Opel); 
-
-// Ayni isimde birden fazla method olusturulabilir fark aldigi parametreler. AMA JS BUNU DESTEKLEMIYOR.
-
-/*console.log(Opel.runEngine());
-
-const Mercedes = new Car ('Mercedes', 'E200', 2023)
-
-console.log((Mercedes));
-console.log(Mercedes.runEngine()); */
-
-//? Inheritance = Miras Alma 'vererben'
-
-// Baska bir class in sahip oldugu her seyi aliyor + kendi sahip olduklari
-
-/* class Vehicle{
-  isActive=false
-  seatCount=5
-  hp
-  constructor (vehicleType){
-    this.vehicleType=vehicleType
-  }
-}
-
-class Car extends Vehicle{
-  isRunning=false
-  
-  //brand='noname'
-  constructor ( brand,model,year=1900,vehicleType) {
-    super(vehicleType)
-    this.brand=brand,
-    this.model=model,
-    this.year=year
-  }
-  runEngine(){
-    this.isRunning=true
-    return this.isRunning
-
-  }
-}
-
-const Mercedes = new Car ('Mercedes', 'E200', 2023, 'Car')
-
-//console.log((Mercedes));
-// console.log(Mercedes.runEngine()); 
-
-class Track extends Vehicle{
-  isRunning=false
-  maxCapacity
-  //brand='noname'
-  constructor ( brand='noname',model,year=1900,vehicleType) {
-    super(vehicleType)
-    this.brand=brand,
-    this.model=model,
-    this.year=year
-  }
-  runEngine(){
-    this.isRunning=true
-    return this.isRunning
-
-  }
-}
-
-class Accessory extends Car{
-constructor(accessoryName,brand,model,year,vehicleType){
-  super(brand,model,year,vehicleType)
-  this.accessoryName=accessoryName
-}
-}
-
-const Seat= new Accessory('Leader', 'Audi', 'Q8', 2022, 'Car')
-console.log(Seat); 
+console.log(NewInstance.methodName());
 */
 
-//? POLYMORPHISM
-
-//Override -> gecersiz kilma demek
-//Overload -> asiri yüklenme demek 
-
-/*class Vehicle{
-  isActive=false
-  seatCount=5
-  hp
-  constructor (vehicleType){
-    this.vehicleType=vehicleType
+//* CONSTRUCTOR
+/*
+class Car {
+  isRunning = false;
+  constructor(brand, model, year = 2005) {
+    this.brand = brand;
+    this.model = model;
+    this.year = year;
   }
-  getDetail(){
-    console.log('this detail about Vehicle');
+  runEngine() {
+    this.isRunning = true;
+    return this.isRunning;
+  }
+}
+  */
+
+/*
+const Opel = new Car("Opel", "Corsa", "2020");
+console.log(Opel);
+console.log(Opel.runEngine());
+console.log(Opel.isRunning);
+
+const Mercedes = new Car("Mercedes", "E200", "2023");
+console.log(Mercedes);
+console.log(Mercedes.runEngine());
+console.log(Mercedes.isRunning);
+*/
+
+// ? INHERITANCE = Miras Alma
+
+// Baska bir sahip olduklari her seyi alir + kendi sahip olduklari
+/*
+class Vehicle {
+  isActive = false;
+  seatCount = 5;
+  hp;
+  constructor(vehicleType) {
+    this.vehicleType = vehicleType;
   }
 }
 
-const newVehicle=new Vehicle('Bus')
+class Car extends Vehicle {
+  isRunning = false;
+
+  constructor(brand, model, year = 2005, vehicleType) {
+    super(vehicleType); // Üst sınıfın yapıcısını çağırıyoruz ve 'vehicleType' olarak 'car' belirliyoruz
+    this.brand = brand;
+    this.model = model;
+    this.year = year;
+  }
+  runEngine() {
+    this.isRunning = true;
+    return this.isRunning;
+  }
+}
+
+const Bmw = new Car("BMW", "E30", 2024, "Car");
+console.log(Bmw);
+*/
+/*
+class Truck extends Vehicle {
+  isRunning = false;
+  maxCa;
+  constructor(brand, model, year = 2005, vehicleType) {
+    super(vehicleType); // Üst sınıfın yapıcısını çağırıyoruz ve 'vehicleType' olarak 'car' belirliyoruz
+    this.brand = brand;
+    this.model = model;
+    this.year = year;
+  }
+  runEngine() {
+    this.isRunning = true;
+    return this.isRunning;
+  }
+}
+*/
+/*
+class Accessory extends Car {
+  constructor(accessoryName, brand, model, year, vehicleType) {
+    super(brand, model, year, vehicleType);
+    this.accessoryName = accessoryName;
+  }
+}
+
+const Seat = new Accessory("Leather", "Mercedes", "s200", 2024, "Car");
+console.log(Seat);
+*/
+
+// ? POLYMORPHISIM
+
+//Override
+//Overload   js desteklemez
+/*
+class Vehicle {
+  isActive = false;
+  seatCount = 5;
+  hp;
+  constructor(vehicleType) {
+    this.vehicleType = vehicleType;
+  }
+  getDetail() {
+    console.log("this detail about vehicle");
+  }
+}
+
+const newVehicle = new Vehicle("Bus");
 console.log(newVehicle.getDetail());
 
+class Car extends Vehicle {
+  isRunning = false;
 
-class Car extends Vehicle{
-  isRunning=false
-  
-  //brand='noname'
-  constructor ( brand,model,year=1900,vehicleType) {
-    super(vehicleType)
-    this.brand=brand,
-    this.model=model,
-    this.year=year
+  constructor(brand, model, year = 2005, vehicleType) {
+    super(vehicleType); // Üst sınıfın yapıcısını çağırıyoruz ve 'vehicleType' olarak 'car' belirliyoruz
+    this.brand = brand;
+    this.model = model;
+    this.year = year;
   }
-  runEngine(){
-    this.isRunning=true
-    return this.isRunning
-
+  runEngine() {
+    this.isRunning = true;
+    return this.isRunning;
   }
-  getDetail(){ // parent class taki fonksiyon override edildi.
-    console.log('this detail about car');
+  // Overload
+  getDetail() {
+    // parent classtaki fonksiyon override edildi.
+    console.log("this detail about car");
   }
-
-  getDetail(x){ // parent class taki fonksiyon override edildi.
+  getDetail(x) {
+    // parent classtaki fonksiyon override edildi.
     console.log(x);
   }
 }
 
+const Bmw = new Car("BMW", "E30", 2024, "Car");
+console.log(Bmw.getDetail());
+console.log(Bmw.getDetail("test"));
+*/
 
-const Mercedes = new Car ('Mercedes', 'E200', 2023, 'Car')
-console.log(Mercedes.getDetail());
-console.log(Mercedes.getDetail('test')); */
+// ? access modifier
+// ? ENCAPSULATION
+// ? PUBLIC        Parent = YES , Child= YES , Instance = YES
+// ? #PRIVATE      Parent = YES , Child= NO , Instance = NO
+// ? _PROTECTED    Parent = YES , Child= YES , Instance = NO
+/*
+class Vehicle {
+  publicProp = "this is public property";
+  #privateProp = "this is private property";
+  _protectedProp = "this is protected property";
 
-//? access modifier
-//   ENCAPSULATION  Kapsülleme
-//   PUBLIC               Parent=YES, Child=YES, Instance=YES
-//  #PRIVATE              Parent=YES, Child=NO, Instance=NO
-//  _PROTECTED korumali   Parent=YES, Child=YES, Instance=NO
-class Vehicle{
-  publicProp='this is public property'
-  #privateProp='this is PRIVATE property'
-  _proctectedProp='this is Proctected property'
-  isActive=false
-  seatCount=5
-  hp
-  constructor(vehicleType){
-      this.vehicleType=vehicleType
+  isActive = false;
+  seatCount = 5;
+  hp;
+  constructor(vehicleType) {
+    this.vehicleType = vehicleType;
   }
-  getDetail(){
-      console.log(this.publicProp);
-      console.log(this.#privateProp);
-      console.log(this._proctectedProp);
-  }
-}
-const newVehicle=new Vehicle('Bus')
-console.log(newVehicle.getDetail());
-class Car extends Vehicle {
-  isRunning=false
-  // brand='noname'
-  constructor(brand='noname',model,year=1900,vehicleType){
-     super(vehicleType)
-     this.brand=brand
-     this.model=model
-     this.year=year
-  }
-  runEngine(){
-      this.isRunning=true
-      return this.isRunning
-  }
-  getDetail(){
+  getDetail() {
     console.log(this.publicProp);
-    //console.log(this.#privateProp); yazamazsin dedi.
-    console.log(this._proctectedProp);
+    console.log(this.#privateProp);
+    console.log(this._protectedProp);
+  }
 }
+
+const newVehicle = new Vehicle("Bus");
+console.log(newVehicle.getDetail());
+
+class Car extends Vehicle {
+  isRunning = false;
+
+  constructor(brand, model, year = 2005, vehicleType) {
+    super(vehicleType); // Üst sınıfın yapıcısını çağırıyoruz ve 'vehicleType' olarak 'car' belirliyoruz
+    this.brand = brand;
+    this.model = model;
+    this.year = year;
+  }
+  runEngine() {
+    this.isRunning = true;
+    return this.isRunning;
+  }
+  getDetail() {
+    console.log(this.publicProp);
+    // console.log(this.#privateProp);
+    console.log(this._protectedProp);
+  }
 }
- const Mercedes =new Car('Mersedes','E200',2023,'Car') // bu instance kismi oluyor yani örnek kismi.
- console.log(Mercedes.publicProp);
- //console.log(Mercedes.#privateProp); yazamazsin dedi.
- console.log(Mercedes._proctectedProp); // procted js desteklemez normalde bu satir hata vermeliydi.
+
+const Bmw = new Car("BMW", "E30", 2024, "Car");
+console.log(Bmw.publicProp);
+// console.log(Bmw.#privateProp);
+console.log(Bmw._protectedProp); //!
+*/
+
+/*
+Sonuç:
+
+publicProp: Her yerden erişilebilir.
+
+#privateProp: Sadece Vehicle sınıfı içinde erişilebilir. Car sınıfı ve dışarıdan erişim mümkün değildir.
+
+_protectedProp: Teknik olarak her yerden erişilebilir, ancak konvansiyon gereği korunmalıdır.
+
+JavaScript'te gerçekten korumalı özellikler oluşturmak için ek yöntemler kullanabilirsiniz, ancak bu yöntemler tamamen güvenli değildir. En iyi uygulama, _ ön eki ile isimlendirilmiş özelliklere dışarıdan erişimi engellemek için takım içinde anlaşmalar yapmaktır.
+*/
+
+// ? GETTER && SETTER
+// ? STATIC keyword
+
+class Car {
+  isRunning = false;
+  #price = 1000;
+  constructor(brand = "noname", model, year = 1900) {
+    this.brand = brand;
+    this.model = model;
+    this.year = year;
+  }
+  runEngine() {
+    this.isRunning = true;
+    return this.isRunning;
+  }
+  // getPrice() {
+  //   return this.#price;
+  // }
+
+  get getPrice() {
+    return this.#price;
+  }
+  set setPrice(price) {
+    this.#price = price;
+    return this.#price;
+  }
+  static staticProp = "static deger";
+
+  static staticMethod(){
+    return 'this is static method'
+  }
+}
+const Mercedes = new Car("Mersedes", "E200", 2023);
+// console.log(Mercedes.getPrice());
+//console.log(Mercedes.getPrice);
+//console.log(Mercedes.setPrice = 2000);
+ 
+//console.log(Mercedes.staticProp);
+console.log(Car.staticProp);
+console.log(Car.staticMethod());
+
