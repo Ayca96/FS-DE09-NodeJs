@@ -67,7 +67,7 @@ console.log(Mercedes.runEngine()); */
 
 // Baska bir class in sahip oldugu her seyi aliyor + kendi sahip olduklari
 
-class Vehicle{
+/* class Vehicle{
   isActive=false
   seatCount=5
   hp
@@ -123,7 +123,102 @@ constructor(accessoryName,brand,model,year,vehicleType){
 }
 
 const Seat= new Accessory('Leader', 'Audi', 'Q8', 2022, 'Car')
-console.log(Seat);
+console.log(Seat); 
+*/
 
-// POLYMORPHISM
+//? POLYMORPHISM
 
+//Override -> gecersiz kilma demek
+//Overload -> asiri yüklenme demek 
+
+/*class Vehicle{
+  isActive=false
+  seatCount=5
+  hp
+  constructor (vehicleType){
+    this.vehicleType=vehicleType
+  }
+  getDetail(){
+    console.log('this detail about Vehicle');
+  }
+}
+
+const newVehicle=new Vehicle('Bus')
+console.log(newVehicle.getDetail());
+
+
+class Car extends Vehicle{
+  isRunning=false
+  
+  //brand='noname'
+  constructor ( brand,model,year=1900,vehicleType) {
+    super(vehicleType)
+    this.brand=brand,
+    this.model=model,
+    this.year=year
+  }
+  runEngine(){
+    this.isRunning=true
+    return this.isRunning
+
+  }
+  getDetail(){ // parent class taki fonksiyon override edildi.
+    console.log('this detail about car');
+  }
+
+  getDetail(x){ // parent class taki fonksiyon override edildi.
+    console.log(x);
+  }
+}
+
+
+const Mercedes = new Car ('Mercedes', 'E200', 2023, 'Car')
+console.log(Mercedes.getDetail());
+console.log(Mercedes.getDetail('test')); */
+
+//? access modifier
+//   ENCAPSULATION  Kapsülleme
+//   PUBLIC               Parent=YES, Child=YES, Instance=YES
+//  #PRIVATE              Parent=YES, Child=NO, Instance=NO
+//  _PROTECTED korumali   Parent=YES, Child=YES, Instance=NO
+class Vehicle{
+  publicProp='this is public property'
+  #privateProp='this is PRIVATE property'
+  _proctectedProp='this is Proctected property'
+  isActive=false
+  seatCount=5
+  hp
+  constructor(vehicleType){
+      this.vehicleType=vehicleType
+  }
+  getDetail(){
+      console.log(this.publicProp);
+      console.log(this.#privateProp);
+      console.log(this._proctectedProp);
+  }
+}
+const newVehicle=new Vehicle('Bus')
+console.log(newVehicle.getDetail());
+class Car extends Vehicle {
+  isRunning=false
+  // brand='noname'
+  constructor(brand='noname',model,year=1900,vehicleType){
+     super(vehicleType)
+     this.brand=brand
+     this.model=model
+     this.year=year
+  }
+  runEngine(){
+      this.isRunning=true
+      return this.isRunning
+  }
+  getDetail(){
+    console.log(this.publicProp);
+    //console.log(this.#privateProp); yazamazsin dedi.
+    console.log(this._proctectedProp);
+}
+}
+ const Mercedes =new Car('Mersedes','E200',2023,'Car') // bu instance kismi oluyor yani örnek kismi.
+ console.log(Mercedes.publicProp);
+ //console.log(Mercedes.#privateProp); yazamazsin dedi.
+ console.log(Mercedes._proctectedProp); // procted js desteklemez normalde bu satir hata vermeliydi.
