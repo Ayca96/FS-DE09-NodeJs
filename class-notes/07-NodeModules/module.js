@@ -55,6 +55,10 @@ test2()
 test3()
 // objelerde index olayi olmadigi icin sira önemli degil.
 
+const name = require('./modules/index')
+console.log(name);
+
+
 /* ----------------------------------------- */
 
 
