@@ -35,3 +35,6 @@ Kodda  yaptigimiz her bir degisikligi aninda görmek istiyorsak nodemon paketini
 // $ Ctrl + C 
 
 /* -------------------------------------------- */
+
+
+//npm install komutu, package.json dosyasında belirtilen bağımlılıkları indirir. Eğer package.json dosyasında bağımlılıklar (dependencies veya devDependencies) tanımlı değilse, node_modules klasörü oluşturulmaz.!!!
