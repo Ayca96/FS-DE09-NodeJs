@@ -4,7 +4,7 @@
 // require('./modules/index.js')
 // require('./modules/index')
 
-require('./modules') // require =import gibi.
+require('./modules')  // require =import gibi.
 // dosya index ise özellikle yazmaya gerekte yok. index default olarak gelir. baska dosya bile olsa indexi baz alir.
 
 /* ------------------------------------- */
@@ -13,6 +13,9 @@ require('./modules') // require =import gibi.
 /*
 const test = require ('./modules/index.js')
 test ()
+
+require('./modules') ()
+
 
 */
 
