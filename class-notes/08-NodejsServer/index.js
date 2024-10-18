@@ -74,7 +74,15 @@ const http = require("node:http"); // built in module
 
 
 http.createServer((req, res) => {
-  res.end()
-  console.log(req);
+  // console.log(req);
+ // console.log(res);
   
-}).listen(PORT, ()=> console.log(`Server is running at : http://${HOST}:${PORT}`))
+  console.log(req.url);
+  if (req.url == '/') {
+      res.end('<h1>this is Home Page</h1>')
+  } else if (req.url == '/about') {
+      res.end('<h1>this is about Page</h1>')
+  } else {
+      res.end('<h1>this is any Page</h1>')
+  }
+}).listen(PORT, () => console.log(`Server is running at : http://${HOST}:${PORT}`))
