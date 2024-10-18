@@ -60,10 +60,10 @@ const http = require("node:http"); // built in module
 
 //http.createServer((req, res) => {});
 
-const app = http.createServer((req, res) => {
-  res.end("Hello World response end");
-  console.log("Hello from console");
-});
+// const app = http.createServer((request, response) => {
+//   res.end("Hello World response end");
+//   console.log("Hello from console");
+// });
 
 // DEFAULT server domain (local domain) => localhost : 127.0.0.1
 // app.listen(PORT, () => {
@@ -72,3 +72,9 @@ const app = http.createServer((req, res) => {
 
 /* -------------------------------------------- */
 
+
+http.createServer((req, res) => {
+  res.end()
+  console.log(req);
+  
+}).listen(PORT, ()=> console.log(`Server is running at : http://${HOST}:${PORT}`))
