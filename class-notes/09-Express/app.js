@@ -97,10 +97,16 @@ const HOST = process.env.HOST || '127.0.0.1'
 // app.post('/', (req, res) => {res.status(202).send({ message: 'ok' })});
 // app.get('/', (req, res) => {res.status(203).send({ message: 'ok' })});
 
-app.get('/download',(req,res)=>{res.download ('./app.js','newName.js')}) // newName app.js nin yeni adi degistirmis oluyoruz.
+//app.get('/download',(req,res)=>{res.download ('./app.js','newName.js')}) // newName app.js nin yeni adi, degistirmis oluyoruz. download methodu ile indirme yapiyoruz.
 
+//? show file content
+//app.get('/show',(req,res)=>{res.sendFile(__dirname+'/app.js')}) // tam dosya yolu lazim -> path must be absolute or specify root to res.sendFile.
 
+//? redirect 301 or 302
 
+app.get('/kalici',(req,res)=>{res.redirect(301,'https://www.clarusway.com')})  //301 kalici kaydediyor
+//app.get('/gecici',(req,res)=>{res.redirect(302,'https://www.clarusway.com/courses/')}) 
+app.get('/gecici',(req,res)=>{res.redirect(302,'https://clarusway.com/courses/')}) //302 gecici kaydediyor sayfayi  
 
 
 
