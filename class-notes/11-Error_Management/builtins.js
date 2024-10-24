@@ -38,7 +38,7 @@ res.send({
 })
 })
 
-
+app.use('/public', express.static('./images'))
 
 
 
