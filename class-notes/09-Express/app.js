@@ -104,9 +104,9 @@ const HOST = process.env.HOST || '127.0.0.1'
 
 //? redirect 301 or 302
 
-app.get('/kalici',(req,res)=>{res.redirect(301,'https://www.clarusway.com')})  //301 kalici kaydediyor
+//app.get('/kalici',(req,res)=>{res.redirect(301,'https://www.clarusway.com')})  //301 kalici kaydediyor
 //app.get('/gecici',(req,res)=>{res.redirect(302,'https://www.clarusway.com/courses/')}) 
-app.get('/gecici',(req,res)=>{res.redirect(302,'https://clarusway.com/courses/')}) //302 gecici kaydediyor sayfayi  
+//app.get('/gecici',(req,res)=>{res.redirect(302,'https://clarusway.com/courses/')}) //302 gecici kaydediyor sayfayi  
 
 
 
