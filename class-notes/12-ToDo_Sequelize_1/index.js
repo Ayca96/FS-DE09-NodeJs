@@ -23,12 +23,12 @@ app.all('/', (req, res) => {
 const {Sequelize,DataTypes}=require('sequelize')
 
 // Creating new instance
-const sequelize = new Sequelize('sqlite:./db.sqlite3') 
+const sequelize = new Sequelize('sqlite:./db.sqlite3') // define your db and the path
 
 // Creating Model
-//sequelize.define('todos', {attributes})
+//sequelize.define('modelName', {attributes})
 
-sequelize.define('todos',{
+const Todo = sequelize.define('todos',{
  /* id:{ // this attribute created auto
     type:DataTypes.INTEGER,
     allowNull:false, // default true
@@ -63,20 +63,35 @@ sequelize.define('todos',{
 
 
 
-// Sync  just execute once > sadece bir kez yürüt
+// Sync  just execute once > sadece bir kez yürüt yoruma al.
 //sequelize.sync() // executing model
 //sequelize.sync({force:true}) // drop table & create table
-sequelize.sync({alter:true}) // to backup & drop table & create table from backup
+//sequelize.sync({alter:true}) // to backup & drop table & create table from backup
 
 
 //Connecting to DB
-sequelize.authenticate()
+sequelize.authenticate() // orm de calisirken bütün fonksiyonlar asenkrondur.
 .then(()=>console.log('*DB connected*'))
 .catch(()=>console.log('*DB not connected*'))
 
+const router= express.Router()
 
+router.post('/todo',async (req,res)=>{
 
+  await Todo.create({
+    title:'Title 1',
+    description:'Description',
+    priority:0,
+    isDone:false
+  })
 
+  res.send({
+    error:false,
+    msg:'hi'
+  })
+})
+
+app.use(router)
 
 // continue from here...
 
