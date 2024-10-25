@@ -60,11 +60,13 @@ sequelize.define('todos',{
 // No need to define created At and updatedAt Created auto:
 })
 
-// Sync
-
-sequelize.sync()
 
 
+
+// Sync  just execute once > sadece bir kez yürüt
+//sequelize.sync() // executing model
+//sequelize.sync({force:true}) // drop table & create table
+sequelize.sync({alter:true}) // to backup & drop table & create table from backup
 
 
 //Connecting to DB
