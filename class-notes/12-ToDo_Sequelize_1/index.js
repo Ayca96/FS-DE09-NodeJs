@@ -5,7 +5,7 @@
 
 const express = require("express");
 const app = express();
-
+require('express-async-errors')
 require("dotenv").config();
 const PORT = process.env.PORT || 8000;
 
@@ -74,22 +74,61 @@ sequelize.authenticate() // orm de calisirken bütün fonksiyonlar asenkrondur.
 .then(()=>console.log('*DB connected*'))
 .catch(()=>console.log('*DB not connected*'))
 
+//Routes
 const router= express.Router()
 
-router.post('/todo',async (req,res)=>{
+//Read Todo
 
-  await Todo.create({
-    title:'Title 1',
-    description:'Description',
-    priority:0,
-    isDone:false
-  })
+router.get('/todo', async(req,res)=>{
 
-  res.send({
+ const result= await Todo.findAll() // findAll bir nevi select yani okuma anlaminda read gibi.
+
+ const results= await Todo.findAndCountAll() // count getiriyor ekstra
+
+ res.status(200).send({
     error:false,
-    msg:'hi'
+    result
+    //results
   })
 })
+
+
+// Create Todo
+router.post('/todo',async (req,res)=>{
+
+  // await Todo.create({
+  //   title:'Title 1',
+  //   description:'Description',
+  //   priority:0,
+  //   isDone:false
+  
+  // })
+
+ 
+ const result = await Todo.create(req.body)
+  res.status(201).send({
+    error:false,
+    result
+  })
+
+ 
+})
+
+// router.delete('/todo/:id',async (req,res)=>{
+//   const results =await Todo.destroy({
+//     where:{id:req.params.id}
+//   })
+//   res.status(200).send({
+//     error:false,
+//     results
+//   })
+// })
+
+
+
+
+
+
 
 app.use(router)
 
