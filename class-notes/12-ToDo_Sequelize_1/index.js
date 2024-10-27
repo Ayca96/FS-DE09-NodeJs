@@ -114,6 +114,23 @@ router.post('/todo',async (req,res)=>{
  
 })
 
+// Delete Todo
+router.delete('/todo/:id', async (req, res) => {
+  const { id } = req.params;
+  const deleted = await Todo.destroy({
+      where: { id }
+  });
+
+  if (deleted) {
+      res.status(204).send();
+  } else {
+      res.status(404).send({
+          error: true,
+          message: 'Todo not found',
+      });
+    }
+});
+
 // router.delete('/todo/:id',async (req,res)=>{
 //   const results =await Todo.destroy({
 //     where:{id:req.params.id}
