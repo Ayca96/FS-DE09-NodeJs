@@ -1,7 +1,7 @@
 'use strict'
 
 const DB_PATH = process.env.DB_PATH || './db.sqlite3';
-const DB_NAME = process.env.DB_NAME || './db.sqlite3';
+const DB_NAME = process.env.DB_NAME || 'sqlite';
 
 // Sequelize
 
