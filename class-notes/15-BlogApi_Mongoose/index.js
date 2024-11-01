@@ -18,7 +18,7 @@ app.use(express.json())
 require('express-async-errors')
 
 // DB Connections
-require('./src/configs/dbConnection')
+require('./src/configs/dbConnection') 
 
 
 // Routes

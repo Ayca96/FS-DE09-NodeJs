@@ -18,7 +18,7 @@ list: async(req,res)=>{
 },
 create: async(req,res)=>{
   
- const result = BlogCategory.create(req.body)
+ const result = await BlogCategory.create(req.body)
  
  res.status(201).send({
   error:false,
