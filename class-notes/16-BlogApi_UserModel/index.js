@@ -27,6 +27,7 @@ app.all('/', (req, res) => {
 })
 
 app.use('/blog',require('./src/routers/blog'))
+app.use('/user',require('./src/routers/user'))
 
 // continue from here...
 

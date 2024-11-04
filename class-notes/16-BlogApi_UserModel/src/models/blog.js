@@ -104,6 +104,6 @@ const BlogPostSchema = new mongoose.Schema({
 //module.exports = {BlogCategory, BlogPost} // key value degeri ayni ise tek isim yazmak yeterli.
 
 module.exports = {
-  BlogCategory : mongoose.model('BlogCategory',BlogCategorySchema),
+ BlogCategory : mongoose.model('BlogCategory',BlogCategorySchema),
  BlogPost: mongoose.model('BlogPost',BlogPostSchema)
 }
