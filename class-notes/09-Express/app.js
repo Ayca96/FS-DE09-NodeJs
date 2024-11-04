@@ -9,7 +9,7 @@ Express.js
  npm i express dotenv
 
 */
-
+   
 
 //? Express server start
 
@@ -18,7 +18,7 @@ const express = require ('express')
 const app= express() // express üzerinde server calistirir
 
 // dotenv 
-/*
+/* 
 const x=require('dotenv')
 x.config() // config dosyasini okur
 */
