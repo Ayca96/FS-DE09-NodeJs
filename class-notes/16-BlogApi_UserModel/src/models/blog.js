@@ -85,7 +85,7 @@ const BlogPostSchema = new mongoose.Schema({
  content:{
   type:String,
   trim:true,
-  required:true
+  required:[true, "this content is required"]
  }
 },
   
