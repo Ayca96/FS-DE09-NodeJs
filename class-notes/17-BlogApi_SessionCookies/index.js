@@ -27,27 +27,28 @@ app.use(session({
 
 // Authentication Middleware
 
-const authentication = async (req,res,next)=>{
-req.user = null
-console.log(req.session);
-if(req.session._id){
+// const authentication = async (req,res,next)=>{
+// req.user = null
+// console.log(req.session);
+// if(req.session._id){
 
-    const user = await User.findById(req.session._id)
-    if(user && user.password == req.session.password){
+//     const user = await User.findById(req.session._id)
+//     if(user && user.password == req.session.password){
         
-        req.user = user
+//         req.user = user
 
-    }else{
-        req.session
-    }
+//     }else{
+//         req.session
+//     }
 
-}
+// }
 
-next()
-}
+// next()
+// }
 
-app.use(authentication)
+//app.use(authentication)
 
+app.use(require('./src/middlewares/authentication'))
 
 // DB Connections
 require('./src/configs/dbConnection') 
