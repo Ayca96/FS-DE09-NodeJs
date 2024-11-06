@@ -8,6 +8,7 @@ EXPRESSJS -- BLOG PROJECT with Mongoose
 
 const express = require("express");
 const app = express();
+const User = require("./src/models/user");
 
 require("dotenv").config();
 const PORT = process.env.PORT || 8000;
@@ -20,8 +21,33 @@ require('express-async-errors')
 // Session-Cookies
 const session = require('cookie-session')
 app.use(session({
-    secret: process.env.KEY_CODE
+    secret: process.env.KEY_CODE,
+    //maxAge:1000 * 60 * 60 * 24 * 2 // 2 days
 }))
+
+// Authentication Middleware
+
+const authentication = async (req,res,next)=>{
+req.user = null
+console.log(req.session);
+if(req.session._id){
+
+    const user = await User.findById(req.session._id)
+    if(user && user.password == req.session.password){
+        
+        req.user = user
+
+    }else{
+        req.session
+    }
+
+}
+
+next()
+}
+
+app.use(authentication)
+
 
 // DB Connections
 require('./src/configs/dbConnection') 
@@ -35,8 +61,8 @@ app.all('/', (req, res) => {
 
     res.send({
         msg:'WELCOME TO BLOG APP',
-        //session:req.session,
-        isLogin:req.session?.user ? true :false
+        session:req.session,
+        isLogin:req.user
 
     })
 })

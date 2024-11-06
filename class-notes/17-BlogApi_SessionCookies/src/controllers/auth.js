@@ -22,9 +22,14 @@ module.exports = {
 
                 if (user.password == passwordEncrypt(password)) {
 
+                    // Session
                     req.session._id = user._id
-                    
+                    req.session.password=user.password
 
+                    // Cookie
+                    if(req.body.rememmberMe==true){
+                      req.sessionOption.maxAge = 1000 * 60 * 60 * 24 * 2
+                    }
 
                     res.status(202).send({
                         error: false,
