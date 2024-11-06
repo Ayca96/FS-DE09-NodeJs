@@ -15,10 +15,16 @@ module.exports = {
         if (email && password) { // checking email and password
 
             const user = await User.findOne({ email: email }) // checking data from database
-
+            console.log(user);
+            
+        
             if (user) {
 
                 if (user.password == passwordEncrypt(password)) {
+
+                    req.session._id = user._id
+                    
+
 
                     res.status(202).send({
                         error: false,
@@ -28,12 +34,12 @@ module.exports = {
                     
                 } else {
                     res.errorStatusCode = 401
-                    throw new Error('User is not found!')
+                    throw new Error('Wrong password or email!')
                 }
 
             } else {
                 res.errorStatusCode = 401
-                throw new Error('Wrong password or email.')
+                throw new Error('User is not found')
             }
 
 
@@ -46,7 +52,11 @@ module.exports = {
     },
 
     logout: async (req, res) => {
-
+        req.session = null 
+        res.status(200).send({
+          error:false,
+          msg:'Logout Success',
+        })
     },
 
 }

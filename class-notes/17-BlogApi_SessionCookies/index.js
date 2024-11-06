@@ -29,9 +29,14 @@ require('./src/configs/dbConnection')
 
 // Routes
 app.all('/', (req, res) => {
+
+    //req.session.user={name:'Ayca'}
+    //req.session = null
+
     res.send({
         msg:'WELCOME TO BLOG APP',
-        session:req.session
+        //session:req.session,
+        isLogin:req.session?.user ? true :false
 
     })
 })
