@@ -7,6 +7,7 @@ EXPRESSJS -- BLOG PROJECT with Mongoose
 -------------------------------------------*/
 
 // export etmenin kisa yolu.
+const User = require('../models/user')
 
 module.exports = async (req,res,next)=>{
   req.user = null

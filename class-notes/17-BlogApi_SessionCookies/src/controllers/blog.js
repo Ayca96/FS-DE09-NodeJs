@@ -22,6 +22,7 @@ module.exports.blogCategory = {
 
   create: async (req, res) => {
     const result = await BlogCategory.create(req.body);
+    req.body.userId = req.user_id
 
     res.status(201).send({
       error: false,
