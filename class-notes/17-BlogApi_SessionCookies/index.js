@@ -17,17 +17,28 @@ const PORT = process.env.PORT || 8000;
 app.use(express.json())
 require('express-async-errors')
 
+// Session-Cookies
+const session = require('cookie-session')
+app.use(session({
+    secret: process.env.KEY_CODE
+}))
+
 // DB Connections
 require('./src/configs/dbConnection') 
 
 
 // Routes
 app.all('/', (req, res) => {
-    res.send('WELCOME TO BLOG API')
+    res.send({
+        msg:'WELCOME TO BLOG APP',
+        session:req.session
+
+    })
 })
 
 app.use('/blog',require('./src/routers/blog'))
 app.use('/user',require('./src/routers/user'))
+app.use('/auth',require('./src/routers/auth'))
 
 // continue from here...
 
