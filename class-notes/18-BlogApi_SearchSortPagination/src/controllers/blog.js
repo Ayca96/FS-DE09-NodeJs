@@ -152,10 +152,11 @@ module.exports.blogPost = {
         // const result = await BlogPost.find({...filter},{...select})
         // const result = await BlogPost.find({}, { categoryId: true, title: true, content: true, _id: false }).populate('categoryId') // default --> _id : true
 
-      const result = res.getModelList(BlogPost)
+      const result = await res.getModelList(BlogPost)
 
         res.status(200).send({
             error: false,
+            details: await res.getModelListDetails(BlogPost),
             result
         })
     },

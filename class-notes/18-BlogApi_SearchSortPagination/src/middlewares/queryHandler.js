@@ -52,10 +52,25 @@ module.exports = async (req,res,next)=>{
   // console.log('limit',limit);
   // console.log('page',page);
   
-  res.getModelList = async (Model)=>{
-  return  await Model.find({ ...filter, ...search }).sort(sort).limit(limit).skip(skip)
-  }
+  res.getModelList = async function (Model, populate = null) {
 
+    return await Model.find({ ...filter, ...search }).sort(sort).limit(limit).skip(skip).populate(populate)
+}
+
+res.getModelListDetails = async function (Model) {
+    
+  const data = Model.find({...filter, ...search})
+  const details = {
+    filter:filter,
+    search,
+    sort,
+    skip,
+    limit,
+    page,
+    totalRecord:data.length
+  }
+  return details
+}
 
   next()
 
