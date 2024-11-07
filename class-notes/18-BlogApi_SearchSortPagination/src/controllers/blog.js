@@ -98,10 +98,60 @@ module.exports.blogPost = {
 
     list: async (req, res) => {
 
+        // FILTERING &  SEARCHING & SORTING & PAGINATION
 
-         //const result = await BlogCategory.find({filter},{select})
-         const result = await BlogCategory.find({},{categoryId:true,title:true, content:true, _id:false}).populate('categoryId')
-        //const result = await BlogPost.find()
+        console.log('line 101-->', req.query)
+
+        // Filtering:
+        // URL?filter[fieldName1]=value1&filter[fieldName2]=value2
+        const filter = req.query?.filter || {}
+
+
+
+        // Searching:
+        // URL?search[fieldName1]=value1&search[fieldName2]=value2
+        // https://www.mongodb.com/docs/manual/reference/operator/query/regex/
+        const search = req.query?.search || {}
+
+        // { "<field>": { "$regex": "pattern" } }
+        for (let key in search)
+            search[key] = { $regex: search[key] } // assiging new value 
+        //console.log(search[key])
+
+        console.log(search)
+
+       // const result = await BlogPost.find({ ...filter, ...search })
+
+        //SORTING
+        //URL?sort[fieldName]=asc&sort[fieldName2]=desc
+        const sort = req.query?.sort || {}
+      
+
+        //LIMIT
+        let limit = Number(req.query?.limit || 20) 
+        limit = limit >0 ? limit : Number(process.env.PAGE_SIZE)
+
+        //PAGE
+        let page = Number(req.query?.page )
+        page = page >0 ? page : 1
+
+        //SKIP
+
+        
+        let skip = Number(req.params?.skip)
+        skip = skip > 0 ? skip : ((page - 1) * limit)
+
+        console.log('skip',skip);
+        console.log('limit',limit);
+        console.log('page',page);
+        
+
+        const result = await BlogPost.find({ ...filter, ...search }).sort(sort).limit(limit).skip(skip)
+
+        // SELECT & POPULATE:
+        // const result = await BlogPost.find({...filter},{...select})
+        // const result = await BlogPost.find({}, { categoryId: true, title: true, content: true, _id: false }).populate('categoryId') // default --> _id : true
+
 
         res.status(200).send({
             error: false,
