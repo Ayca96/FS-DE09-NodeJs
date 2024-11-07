@@ -98,60 +98,61 @@ module.exports.blogPost = {
 
     list: async (req, res) => {
 
-        // FILTERING &  SEARCHING & SORTING & PAGINATION
+    //     // FILTERING &  SEARCHING & SORTING & PAGINATION
 
-        console.log('line 101-->', req.query)
+    //     console.log('line 101-->', req.query)
 
-        // Filtering:
-        // URL?filter[fieldName1]=value1&filter[fieldName2]=value2
-        const filter = req.query?.filter || {}
+    //     // Filtering:
+    //     // URL?filter[fieldName1]=value1&filter[fieldName2]=value2
+    //     const filter = req.query?.filter || {}
 
 
 
-        // Searching:
-        // URL?search[fieldName1]=value1&search[fieldName2]=value2
-        // https://www.mongodb.com/docs/manual/reference/operator/query/regex/
-        const search = req.query?.search || {}
+    //     // Searching:
+    //     // URL?search[fieldName1]=value1&search[fieldName2]=value2
+    //     // https://www.mongodb.com/docs/manual/reference/operator/query/regex/
+    //     const search = req.query?.search || {}
 
-        // { "<field>": { "$regex": "pattern" } }
-        for (let key in search)
-            search[key] = { $regex: search[key] } // assiging new value 
-        //console.log(search[key])
+    //     // { "<field>": { "$regex": "pattern" } }
+    //     for (let key in search)
+    //         search[key] = { $regex: search[key] } // assiging new value 
+    //     //console.log(search[key])
 
-        console.log(search)
+    //     console.log(search)
 
-       // const result = await BlogPost.find({ ...filter, ...search })
+    //    // const result = await BlogPost.find({ ...filter, ...search })
 
-        //SORTING
-        //URL?sort[fieldName]=asc&sort[fieldName2]=desc
-        const sort = req.query?.sort || {}
+    //     //SORTING
+    //     //URL?sort[fieldName]=asc&sort[fieldName2]=desc
+    //     const sort = req.query?.sort || {}
       
 
-        //LIMIT
-        let limit = Number(req.query?.limit || 20) 
-        limit = limit >0 ? limit : Number(process.env.PAGE_SIZE)
+    //     //LIMIT
+    //     let limit = Number(req.query?.limit || 20) 
+    //     limit = limit >0 ? limit : Number(process.env.PAGE_SIZE)
 
-        //PAGE
-        let page = Number(req.query?.page )
-        page = page >0 ? page : 1
+    //     //PAGE
+    //     let page = Number(req.query?.page )
+    //     page = page >0 ? page : 1
 
-        //SKIP
+    //     //SKIP
 
         
-        let skip = Number(req.params?.skip)
-        skip = skip > 0 ? skip : ((page - 1) * limit)
+    //     let skip = Number(req.query?.skip)
+    //     skip = skip > 0 ? skip : ((page - 1) * limit)
 
-        console.log('skip',skip);
-        console.log('limit',limit);
-        console.log('page',page);
+    //     console.log('skip',skip);
+    //     console.log('limit',limit);
+    //     console.log('page',page);
         
 
-        const result = await BlogPost.find({ ...filter, ...search }).sort(sort).limit(limit).skip(skip)
+    //     const result = await BlogPost.find({ ...filter, ...search }).sort(sort).limit(limit).skip(skip)
 
         // SELECT & POPULATE:
         // const result = await BlogPost.find({...filter},{...select})
         // const result = await BlogPost.find({}, { categoryId: true, title: true, content: true, _id: false }).populate('categoryId') // default --> _id : true
 
+      const result = res.getModelList(BlogPost)
 
         res.status(200).send({
             error: false,
