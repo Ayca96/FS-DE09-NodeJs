@@ -90,6 +90,11 @@ const BlogPostSchema = new mongoose.Schema({
         trim: true,
         // required: true
         required: [true, 'Content is required!']
+    },
+
+    published:{
+        type:Boolean,
+        default:true
     }
 
     // updatedAt
