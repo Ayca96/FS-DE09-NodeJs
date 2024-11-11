@@ -36,12 +36,17 @@ require('./src/configs/dbConnection')
 
 /* ------------------------------------------------------- */
 // Routes:
+
+//main
 app.all('/', (req, res) => {
 
     res.send({
         message: 'WELCOME TO PERSONNEL API',
     })
 })
+
+// department
+app.use('departments',require('./src/routes/department'))
 
 
 

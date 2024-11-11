@@ -13,7 +13,14 @@ const DepartmentSchema = new Schema({
         trim:true,
         required:true,
         unique:true
-    }
+    },
+    // validate:(name)=>{
+    //     if(name.length<5){
+    //         return false
+    //     }else{
+    //         return true
+    //     }
+    // }
 
 },{
     collections:'departments',
