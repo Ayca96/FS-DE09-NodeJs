@@ -66,7 +66,7 @@ module.exports = {
       const Personnel = require('../models/personnel')
 
     //   const result = await Personnel.find({departmentId:req.params.id}).populate('departmentId')
-    const result = await res.getModelList(Personnel, {departmentId:req.params.id},{departmentId})
+    const result = await res.getModelList(Personnel, {departmentId:req.params.id},'departmentId')
 
     res.status().send({
         error:false,
