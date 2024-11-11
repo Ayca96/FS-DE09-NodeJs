@@ -47,8 +47,17 @@ app.all('/', (req, res) => {
 
 // department
 app.use('departments',require('./src/routes/department'))
+app.use('personnels',require('./src/routes/personnel'))
 
+//Not Found
 
+app.use('*',(req,res)=>{
+
+    res.status(404).send({
+        error:true,
+        message:"This route is not found!"
+    })
+})
 
 
 // errorHandler:
