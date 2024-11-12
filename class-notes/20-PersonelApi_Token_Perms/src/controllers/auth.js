@@ -106,5 +106,18 @@ module.exports = {
     }
   },
 
-  logout: async (req, res) => {},
+  logout: async (req, res) => {
+
+
+    const data = req.user ? await Token.deleteOne({
+        userId: req.user._id
+    }) : null
+
+
+    res.status(200).send({
+        error:false,
+        message:'Logout Success',
+        data
+    })
+  },
 };
