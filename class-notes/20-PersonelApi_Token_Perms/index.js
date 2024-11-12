@@ -49,13 +49,16 @@ app.all('/', (req, res) => {
         session: req.session
     })
 })
+// auth
+app.use('/auth', require('./src/routes/auth'))
+// token
+app.use('/tokens', require('./src/routes/token'))
 
 // department
 app.use('/departments', require('./src/routes/department'))
 // personnel
 app.use('/personnels', require('./src/routes/personnel'))
-// auth
-app.use('/auth', require('./src/routes/auth'))
+
 
 // Not Found
 app.use('*', (req, res) => {
