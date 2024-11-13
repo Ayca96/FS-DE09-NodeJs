@@ -8,6 +8,7 @@ const Department = require('../models/department')
 
 module.exports = {
     list: async (req, res) => {
+
         const result = await res.getModelList(Department);
 
         res.status(200).send({
@@ -18,7 +19,11 @@ module.exports = {
     },
 
     create: async (req, res) => {
+
+        //todo check if there is a lead, if it is there make old user lead fieldname false 
+
         const result = await Department.create(req.body);
+
         res.status(201).send({
             error: false,
             result,
@@ -55,7 +60,11 @@ module.exports = {
     },
 
     delete: async (req, res) => {
+
+        //todo if a lead is deleted assign new lead to this department
+
         const result = await Department.deleteOne({ _id: req.params.id });
+
         res.status(result.deletedCount ? 204 : 404).send({
             error: !result.deletedCount,
             result,
@@ -75,6 +84,9 @@ module.exports = {
         })
 
     }
+
+    //todo multi delete
+
 
 
 };

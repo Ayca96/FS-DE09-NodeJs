@@ -1,27 +1,33 @@
-"use strict"
-
-const Token = require("../models/token")
-
+"use strict";
 /* -------------------------------------------------------
     EXPRESS - Personnel API
 ------------------------------------------------------- */
-
 // Authentication Control Middleware:
 
-module.exports = async(req,res,next)=>{
+const Token = require('../models/token')
 
-  req.user = null
+module.exports = async (req, res, next) => {
 
-  const auth = req.headers.authorization || null
+    req.user = null
 
-  const tokenKey = auth ? auth.split('') : null
-  if(tokenKey && tokenKey[0]== "Token"){
-    const tokenData = await Token.findOne({token:tokenKey[1]}).populate('userId')
-    if(tokenData)req.user = tokenData.userId
-    
-  }
-  // console.log(auth);
+    // Authorization: Token ...tokenKey...
+    // Authorization: ApiKey ...tokenKey...
+    // Authorization: Bearer ...tokenKey...
+    // Authorization: Auth ...tokenKey...
+    // Authorization: X-API-KEY ...tokenKey...
+    // Authorization: x-auth-token ...tokenKey...
 
+    const auth = req.headers.authorization || null
 
-  next()
+    const tokenKey = auth ? auth.split(' ') : null
+
+    if (tokenKey && tokenKey[0] == "Token") {
+
+        const tokenData = await Token.findOne({ token: tokenKey[1] }).populate('userId')
+
+        if (tokenData) req.user = tokenData.userId
+
+    }
+
+    next()
 }
