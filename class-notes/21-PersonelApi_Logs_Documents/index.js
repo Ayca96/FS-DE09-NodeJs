@@ -50,8 +50,19 @@ require('express-async-errors')
 // npm i swagger-ui-express
 // npm i redoc-express
 
+//JSON
 
+app.use('/documents/json', (req,res)=>{
+    res.sendFile('swagger.json', {root:'.'})
+})
 
+//Swagger
+const swaggerUi = require('swagger-ui-express') 
+const swaggerJson = require('./swagger.json')
+
+app.use('/documents/swagger', swaggerUi.serve, swaggerUi.setup(swaggerJson,{
+    swaggerOptions:{persistAuthorization:true }
+}))
 
 //Morgan Logger
 app.use(require('./src/middlewares/logger'))
