@@ -20,14 +20,33 @@ app.use(express.json())
 require('express-async-errors')
 
 // Morgan
-const morgan = require('morgan')
+//const morgan = require('morgan')
 // app.use(morgan('tiny'))
 // app.use(morgan('dev'))
 // app.use(morgan('short'))
 // app.use(morgan('common'))
 // app.use(morgan('combined'))
 //Custom Log:
-app.use(morgan('TIME=":date[iso]" - URL=":url" - Method=":method" - IP=":remote-addr" - Status=":status" - Sign=":user-agent" (:response-time[digits] ms)'))
+// app.use(morgan('TIME=":date[iso]" - URL=":url" - Method=":method" - IP=":remote-addr" - Status=":status" - Sign=":user-agent" (:response-time[digits] ms)'))
+
+//Write to File
+// const fs = require('node:fs')
+// app.use(morgan('combined', {
+//     stream:fs.createWriteStream('./access.log', {flags:'a'})
+// }))
+
+//Write to File -  Day to day
+//  const fs = require('node:fs')
+//  const now = new Date() // new key i instance yani objedir. string olmasi icin toISOString yaptik.
+//  const today = now.toISOString().split('T')[0]
+// //console.log(today);
+
+// app.use(morgan('combined', {
+//     stream: fs.createWriteStream(`./logs/${today}.log`,{flags:'a+'})
+// }))
+
+//Morgan Logger
+app.use(require('./src/middlewares/logger'))
 
 // Session-Cookies
 const session = require('cookie-session');
