@@ -45,6 +45,14 @@ require('express-async-errors')
 //     stream: fs.createWriteStream(`./logs/${today}.log`,{flags:'a+'})
 // }))
 
+//Documentation
+// npm i swagger-autogen
+// npm i swagger-ui-express
+// npm i redoc-express
+
+
+
+
 //Morgan Logger
 app.use(require('./src/middlewares/logger'))
 
