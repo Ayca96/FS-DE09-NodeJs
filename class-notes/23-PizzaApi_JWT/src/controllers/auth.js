@@ -56,6 +56,7 @@ module.exports = {
         }
 
          /* Simple token */
+         
 
          /* jwt */
   
@@ -98,6 +99,10 @@ module.exports = {
         res.send({
             error: false,
             token: tokenData.token,
+            bearer:{
+               access:accessToken,
+               refresh:refreshToken
+            },
             user,
         });
 
