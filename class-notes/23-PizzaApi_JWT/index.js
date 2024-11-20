@@ -72,21 +72,24 @@ app.all('/', (req, res) => {
         user: req.user,
     })
 })
+//All Routes
+//app.use('/', require('./src/routes/index'))
+app.use('/', require('./src/routes'))
 
-// Auth:
-app.use('/auth', require('./src/routes/auth'))
-// Tokens:
-app.use('/tokens', require('./src/routes/token'))
-// Users:
-app.use('/users', require('./src/routes/user'))
-// Toppings:
-app.use('/toppings', require('./src/routes/topping'))
-// Pizza:
-app.use('/pizzas', require('./src/routes/pizza'))
-// Order:
-app.use('/orders', require('./src/routes/order'))
-// Documents:
-app.use('/documents', require('./src/routes/document'))
+// // Auth:
+// app.use('/auth', require('./src/routes/auth'))
+// // Tokens:
+// app.use('/tokens', require('./src/routes/token'))
+// // Users:
+// app.use('/users', require('./src/routes/user'))
+// // Toppings:
+// app.use('/toppings', require('./src/routes/topping'))
+// // Pizza:
+// app.use('/pizzas', require('./src/routes/pizza'))
+// // Order:
+// app.use('/orders', require('./src/routes/order'))
+// // Documents:
+// app.use('/documents', require('./src/routes/document'))
 
 /* ------------------------------------------------------- */
 
