@@ -59,6 +59,7 @@ module.exports = {
 
          /* jwt */
   
+         //Access Token
             //const {_id, userName,email,isActive,isAdmin}= user
 
 
@@ -74,7 +75,21 @@ module.exports = {
         // convert to jwt 
 
         //jst.sign(payload,key,{expireIn:3m})
-        const accessToken = jwt.sign(accessData,process.env.ACCESS_KEY)
+        const accessToken = jwt.sign(accessData,process.env.ACCESS_KEY,{expiresIn:'30m'})
+
+        // refreshToken
+
+        const refreshData ={
+            _id:user._id,
+            password:user.password
+        }
+
+
+        // convert to jwt
+
+        const refreshToken= jwt.sign(refreshData,process.env.REFRESH_KEY,{expiresIn:'1d'})
+
+
          
         /*jwt  */
 
