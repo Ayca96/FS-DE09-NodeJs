@@ -56,6 +56,75 @@ app.use(require('./src/middlewares/authentication'))
 // findSearchSortPage / res.getModelList:
 app.use(require('./src/middlewares/queryHandler'))
 
+/* ----------------------------------------------------------*/
+
+// E-Mail:
+// npm i nodemailer
+
+//const nodemailer = require('nodemailer')
+
+// Create Test Account 
+//nodemailer.createTestAccount().then((data)=>console.log(data))
+
+// user: 'rrhsflgbqmq2alff@ethereal.email',
+//   pass: '9bG6cbnmsdnsZdaspH',
+//   smtp: { host: 'smtp.ethereal.email', port: 587, secure: false },
+//   imap: { host: 'imap.ethereal.email', port: 993, secure: true },
+//   pop3: { host: 'pop3.ethereal.email', port: 995, secure: true },
+//   web: 'https://ethereal.email',
+//   mxEnabled: false
+
+// const transporter = nodemailer.createTransport({
+//     //SMTP 
+//     host:'smtp.ethereal.email',
+//     port:587,
+//     secure:false,
+//     auth:{
+//         user:"rrhsflgbqmq2alff@ethereal.email",
+//         pass:'9bG6cbnmsdnsZdaspH'
+//     }
+// })
+
+//console.log(transporter);
+
+// Send Email
+
+//  transporter.sendMail({
+
+//     from:"rrhsflgbqmq2alff@ethereal.email",
+//     to:"aycakubra1@gmail.com",
+//     subject:"Hello",
+//     text:"Hello there, How are you?",
+//     html:"<p> <b>Hello There</b> <br> How are you?</p>"
+//  }, function (error,success) {
+//     success ? console.log('SUCCESS:', success) : console.log('ERROR:', error)
+//  })
+
+// GoogleMail (gmail)
+// Google account home security two step verify app-passwords
+//* GoogleMail (gmail)
+//* Google -> AccountHome -> Security -> Two-Step-Verify -> App-Passwords
+
+// const transporter = nodemailer.createTransport({
+//     service: 'gmail',
+//     auth: {
+//         user: "alidrl26@gmail.com",
+//         pass: 'vbyt klrm hehd xubl'
+//     }
+// })
+
+// transporter.sendMail({
+//     from: "alidrl26@gmail.com",
+//     to: "ktkurt78@gmail.com",
+//     subject: "Hello hocam!",
+//     text: "Hello there, How are you, how is class going ?",
+//     html: '<p> <b> Hello There </b> <br> How are you ? </p>'
+
+// }, function (error, success) {
+//     success ? console.log('SUCCESS:', success) : console.log('ERROR:', error)
+// })
+
+
 /* ------------------------------------------------------- */
 // Routes:
 

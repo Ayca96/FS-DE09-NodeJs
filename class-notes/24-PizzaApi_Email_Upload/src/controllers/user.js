@@ -4,6 +4,8 @@
 ------------------------------------------------------- */
 
 const User = require('../models/user')
+const SendMail = require('../helpers/sendMail');
+const sendMail = require('../helpers/sendMail');
 
 module.exports = {
 
@@ -32,6 +34,7 @@ module.exports = {
     },
 
     create: async (req, res) => {
+
         /*
              #swagger.tags = ["Users"]
              #swagger.summary = "Create User"
@@ -42,6 +45,14 @@ module.exports = {
         }
 
         const result = await User.create(req.body);
+
+        sendMail(
+            result.email,
+            `Welcome ${result.userName} to DE09 Pizza Shop`, 
+            `<h1>Welcome ${result.userName}</h1>`,
+            `<h2> We are happy to see you :) </h2>`
+
+        )
 
         res.status(200).send({
             error: false,
