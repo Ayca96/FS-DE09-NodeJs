@@ -11,20 +11,20 @@ const { list, create, read, update, deletePizza } = require('../controllers/pizz
 //UPLOAD (Multer Middlewares)
 // npm i multer
 
-const multer = require('multer')
+// const multer = require('multer')
 
-const upload = multer ({
-    //dest:'./uploads'
-    storage:multer.diskStorage({
-        destination:'./uploads',
-        filename:function(req,file,returnCallback){
-            console.log('file ----',file);
-           // returnCallback(error,filename) // syntax
-           returnCallback(null,file.originalname)
+// const upload = multer ({
+//     //dest:'./uploads'
+//     storage:multer.diskStorage({
+//         destination:'./uploads',
+//         filename:function(req,file,returnCallback){
+//             console.log('file ----',file);
+//            // returnCallback(error,filename) // syntax
+//            returnCallback(null, Date.now() + '_', file.originalname)
             
-        }
-    })
-})
+//         }
+//     })
+// })
 
 
 // URL: /pizzas
@@ -36,7 +36,11 @@ router.route('/')
  //.post(upload.array('image'),create)
 
 
-router.route('/:id').get(read).put(update).patch(update).delete(deletePizza)
+router.route('/:id')
+.get(read)
+.put(upload.single('image'),update)
+.patch(upload.single('image'),update)
+.delete(deletePizza)
 
 /* ------------------------------------------------------- */
 module.exports = router

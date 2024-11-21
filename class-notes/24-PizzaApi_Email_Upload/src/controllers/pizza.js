@@ -40,6 +40,15 @@ module.exports = {
       let { toppingIds } = req.body;
       req.body.toppingIds = [...new Set(toppingIds)]; // [1,1,2,2,3,3,5]=>[1,2,3,5]
   
+      // FILE 
+      // console.log(req.file); single
+       // console.log(req.files); array
+       if(req.file){
+        req.body.image = req.file.filename
+       }
+
+
+
       const data = await Pizza.create(req.body);
   
       res.status(201).send({

@@ -31,7 +31,7 @@ require('express-async-errors')
 const { dbConnection } = require('./src/configs/dbConnection')
 dbConnection()
 
-/* // Cross-origin resource sharing (CORS): $ npm i cors
+ // Cross-origin resource sharing (CORS): $ npm i cors
 const cors = require('cors')
 const defaultCorsOptions = {
     origin: "*",
@@ -39,7 +39,7 @@ const defaultCorsOptions = {
     preflightContinue: false,
     optionsSuccessStatus: 204
 }
-app.use(cors()) */
+app.use(cors()) 
 
 /* ------------------------------------------------------- */
 // Middlewares:
@@ -61,7 +61,7 @@ app.use(require('./src/middlewares/queryHandler'))
 // E-Mail:
 // npm i nodemailer
 
-//const nodemailer = require('nodemailer')
+//const nodemailer = require('nodemailer') third party packet disardan yüklendigi icin
 
 // Create Test Account 
 //nodemailer.createTestAccount().then((data)=>console.log(data))
@@ -144,6 +144,12 @@ app.all('/', (req, res) => {
         },
     })
 })
+
+
+// StaticFile:
+
+app.use('./images', express.static('./uploads'))
+
 
 
 /* ------------------------------------------------------- */
