@@ -6,7 +6,7 @@ require('dotenv').config()
 const HOST = process.env?.HOST || '127.0.0.1'
 const PORT = process.env?.PORT || 8000
 /* ------------------------------------------------------- */
-const swaggerAutogen = require('swagger-autogen')()
+const swaggerAutogen = require('swagger-autogen')() // swagger fonksiyon
 const packageJson = require('./package.json')
 
 const document = {
@@ -41,3 +41,7 @@ const outputFile = './src/configs/swagger.json'
 
 // Create JSON file:
 swaggerAutogen(outputFile, routes, document)
+
+
+// Swagger Autogen, Express.js gibi framework'lerle kullanılan ve API dökümantasyonu oluşturmayı kolaylaştıran bir araçtır. Swagger Autogen, yazmış olduğunuz backend kodlarından Swagger/OpenAPI belgelerini otomatik olarak üretir. Bu, manuel olarak JSON  oluşturmak yerine, API dökümantasyonunuzu kodunuzla senkronize tutmanın pratik bir yoludur.
+

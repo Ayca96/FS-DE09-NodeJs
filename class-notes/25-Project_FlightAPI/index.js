@@ -26,7 +26,7 @@ dbConnection()
 // Middlewares:
 
 // Accept JSON:
-app.use(express.json())
+app.use(express.json()) //express.json(), gelen isteklerin gövdesindeki JSON verisini otomatik olarak ayrıştırır.Ayrıştırılmış veri, kolayca erişmek ve kullanmak için req.body'ye atanır.
 
 // Check Authentication:
 app.use(require('./src/middlewares/authentication'))
@@ -35,7 +35,7 @@ app.use(require('./src/middlewares/authentication'))
 app.use(require('./src/middlewares/logger'))
 
 // Query Handler:
-app.use(require('./src/middlewares/authentication'))
+app.use(require('./src/middlewares/queryHandler'))
 
 /* ------------------------------------------------------- */
 // Routes:
@@ -45,12 +45,15 @@ app.all('/', (req, res) => {
     res.send({
         error: false,
         message: 'Welcome to FLIGHT RESERVATION API',
-        documents: '/documents',
-        user: req.user
+        
+       
     })
 })
 
 // Index Route:
+
+//app.use(require('./src/routes/index'))
+app.use(require('./src/routes/'))
 
 
 

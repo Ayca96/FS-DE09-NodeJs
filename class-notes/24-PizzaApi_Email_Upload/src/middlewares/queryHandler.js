@@ -79,3 +79,10 @@ module.exports = (req, res, next) => {
     
     next()
 }
+
+
+// Gelen isteklerdeki query parametrelerini işleyerek, veritabanı sorgularını kolaylaştıracak bir yapı oluşturuyoruz.
+// Bu middleware sayesinde, tekrar eden kod yazmak yerine ortak bir sorgulama sistemine sahip oluyoruz.
+// Ayrıca, iki önemli fonksiyon tanımlıyoruz:
+// res.getModelList: Veritabanı modellerini sorgulamak ve listelemek için.
+// res.getModelListDetails: Veritabanı sorgularının sonuçlarıyla ilgili detaylı bilgiler (sayfa bilgisi, toplam kayıt vb.) almak için.
