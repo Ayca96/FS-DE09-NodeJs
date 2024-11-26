@@ -11,6 +11,9 @@ router.use('/auth', require('./auth'))
 //user
 router.use('/users', require('./user'))
 
+//flight
+router.use('/flights', require('./flight'))
+
 
 // documents:
 router.use('/documents', require('./document'))

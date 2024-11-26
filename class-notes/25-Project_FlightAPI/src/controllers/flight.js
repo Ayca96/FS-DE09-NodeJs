@@ -65,7 +65,7 @@ module.exports = {
     });
   },
 
-  deleteFlight: async () => {
+  deleteFlight: async (req,res) => {
     /*
         #swagger.tags = ["Flights"]
         #swagger.summary = "Delete Flight"
