@@ -26,6 +26,84 @@ module.exports ={
 
         res.status(200).send({
             error: false,
+            details: await res.getModelListDetails(User),
+            result
+        })
+    },
+
+    create: async (req,res)=>{
+
+        // $ref: '#/definitions/User'
+        /*
+            #swagger.tags = ["Users"]
+            #swagger.summary = "Create User"
+            #swagger.parameters['body'] = {
+                in:'body',
+                required: true,
+                schema: {
+                    "username": "test",
+                    "password": "1234",
+                    "email": "test@site.com",
+                    "isActive": true,
+                    "isStaff": false,
+                    "isAdmin": false,
+                }
+            }
+        */
+
+
+
+        // First solution
+
+        // if(req.body.password.length > 5){
+        //     const result = await User.create(req.body)
+        //     res.status(200).send({
+        //         error:false,
+        //         result
+        //     })
+        // } else {
+        //     res.errorStatusCode = 401
+        //     throw new Error ('Password must be at least 6 characther')
+        // }
+
+        // Second solution
+
+        if (!/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&]).{8,}$/.test(req.body.password)) {
+            throw new Error("Password must be at least 8 characters long and contain at least one special character and at least one uppercase character")
+        }
+
+        res.status(200).send({
+            error: false,
+            result
+        })
+
+
+    },
+    read: async (req, res) => {
+
+        /*
+           #swagger.tags = ["Users"]
+           #swagger.summary = "Get Single User"
+   */
+
+        const result = await User.findOne({ _id: req.params.id })
+
+
+        res.status(200).send({
+            error: false,
+            result
+        })
+    },
+    update: async (req, res) => {
+        /*
+           #swagger.tags = ["Users"]
+           #swagger.summary = "Update User"
+     */
+
+        const result = await User.updateOne({ _id: req.params.id }, req.body, {new: true, runValidators: true })
+
+        res.status(202).send({
+            error: false,
             result
         })
     },
