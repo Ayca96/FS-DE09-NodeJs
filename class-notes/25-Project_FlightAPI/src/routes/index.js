@@ -5,15 +5,14 @@
 const router = require('express').Router()
 /* ------------------------------------------------------- */
 
-//user
-
-router.use('/users', require('./user'))
-
 // auth
 router.use('/auth', require('./auth'))
 
-// documents:
+//user
+router.use('/users', require('./user'))
 
+
+// documents:
 router.use('/documents', require('./document'))
 
 

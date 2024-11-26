@@ -9,6 +9,6 @@ const {login} = require('../controllers/auth')
 
 
 // URL : /auth
-router.route('/').post(login)
+router.route('/login').post(login)
 /* ------------------------------------------------------- */
 module.exports = router
