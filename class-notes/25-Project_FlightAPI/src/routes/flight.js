@@ -4,6 +4,7 @@
 ------------------------------------------------------- */
 
 const router = require('express').Router()
+// const flightController = require('../controllers/flight');
 
 // URL: /flights
 
@@ -18,6 +19,10 @@ router.route('/:id')
 .put(flight.update)
 .patch(flight.update)
 .delete(flight.deleteFlight)
+
+
+
+// router.get('/flights-with-user', flightController.getFlightsWithUser); // Uçuşlar ve kullanıcı bilgilerini alıyoruz
 
 /* ------------------------------------------------------- */
 module.exports = router

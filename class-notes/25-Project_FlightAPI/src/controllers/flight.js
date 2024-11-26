@@ -35,7 +35,7 @@ module.exports = {
             #swagger.summary = "Read Flight"
         */
 
-    const result = await Flights.findOne({ _id: req.params.id });
+    const result = await Flights.findOne({ _id: req.params.id }).populate('createdId');
 
     res.status(200).send({
       error: false,
@@ -77,4 +77,6 @@ module.exports = {
       error: !deletedCount,
     });
   },
+
+  
 };
