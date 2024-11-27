@@ -13,7 +13,7 @@ require('dotenv').config()
 const PORT = process.env?.PORT || 8000
 
 // asyncErrors to errorHandler:
-require('express-async-errors') // asenkron hatalari yakalayabilmek icin.
+require('express-async-errors')
 
 /* ------------------------------------------------------- */
 // Configrations:
@@ -25,8 +25,8 @@ dbConnection()
 /* ------------------------------------------------------- */
 // Middlewares:
 
-// Accept JSON:
-app.use(express.json()) //express.json(), gelen isteklerin gövdesindeki JSON verisini otomatik olarak ayrıştırır.Ayrıştırılmış veri, kolayca erişmek ve kullanmak için req.body'ye atanır.
+// Parse JSON:
+app.use(express.json())
 
 // Check Authentication:
 app.use(require('./src/middlewares/authentication'))
@@ -45,16 +45,11 @@ app.all('/', (req, res) => {
     res.send({
         error: false,
         message: 'Welcome to FLIGHT RESERVATION API',
-        
-       
     })
 })
 
 // Index Route:
-
-
-//app.use(require('./src/routes/index'))
-app.use(require('./src/routes/'))
+app.use(require('./src/routes'))
 
 
 

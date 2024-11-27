@@ -6,7 +6,7 @@ const { mongoose } = require('../configs/dbConnection')
 const passwordEncrypt = require('../helpers/passwordEncrypt')
 /* ------------------------------------------------------- *
 {
-    "username": "test",
+    "userName": "test",
     "password": "1234",
     "email": "test@site.com",
     "isActive": true,
@@ -23,21 +23,20 @@ const UserSchema = new mongoose.Schema({
         trim: true,
         required: true,
         unique: true,
-
     },
+
     password: {
         type: String,
         trim: true,
         required: true,
-        set: (password) => passwordEncrypt(password),
-        // validate: (password) => true -> we will do this validation in controller get, bir özelliğe erişildiğinde işlem yapar.set, bir özelliğe değer atandığında işlem yapar.
+        set: (password) => passwordEncrypt(password)
     },
 
     email: {
         type: String,
         trim: true,
-        unique: [true, 'This email has been taken already'],
-        required: [true, 'Email is required!'],
+        required: [true, 'Email field must be filled.'],
+        unique: [true, 'This email has been taken already.'],
         validate: [
             (email) => /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email),
             "Please fill a valid email address",
@@ -49,9 +48,9 @@ const UserSchema = new mongoose.Schema({
         default: true
     },
 
-    isStaff:{
-        type:Boolean,
-        default:false
+    isStaff: {
+        type: Boolean,
+        default: false
     },
 
     isAdmin: {
@@ -59,9 +58,11 @@ const UserSchema = new mongoose.Schema({
         default: false
     }
 
-},{
-    collection:"user",
+}, {
+    collection: 'users',
     timestamps: true
 })
 
+/* ------------------------------------------------------- */
 module.exports = mongoose.model('User', UserSchema)
+

@@ -1,82 +1,108 @@
-"use strict";
+"use strict"
 /* -------------------------------------------------------
     NODEJS EXPRESS | Flight API
 ------------------------------------------------------- */
 
-const Flights = require("../models/flight");
+// Flight Controller:
+
+const Flight = require('../models/flight')
 
 module.exports = {
-  list: async (req, res) => {
-    /*
-         #swagger.tags = ["Flights"]
-         #swagger.summary = "List Flights"
-        */
 
-    const result = await Flights.find();
-
-    res.status(200).send({
-      error: false,
-      result,
-    });
-  },
-
-  create: async (req, res) => {
-    const result = await Flights.create(req.body);
-
-    res.status(200).send({
-      error: false,
-      result,
-    });
-  },
-
-  read: async (req, res) => {
-    /* 
+    list: async (req, res) => {
+        /*
             #swagger.tags = ["Flights"]
-            #swagger.summary = "Read Flight"
+            #swagger.summary = "List Flights"
+            #swagger.description = `
+                You can send query with endpoint for search[], sort[], page and limit.
+                <ul> Examples:
+                    <li>URL/?<b>search[field1]=value1&search[field2]=value2</b></li>
+                    <li>URL/?<b>sort[field1]=1&sort[field2]=-1</b></li>
+                    <li>URL/?<b>page=2&limit=1</b></li>
+                </ul>
+            `
         */
 
-    const result = await Flights.findOne({ _id: req.params.id }).populate('createdId');
+        const data = await res.getModelList(Flight)
 
-    res.status(200).send({
-      error: false,
-      result,
-    });
-  },
+        res.status(200).send({
+            error: false,
+            details: await res.getModelListDetails(Flight),
+            data
+        })
+    },
 
-  update: async (req, res) => {
-    /*
-        #swagger.tags = ["Flights"]
-        #swagger.summary = "Update Flight"
-        #swagger.parameters['body'] = {
-            in: 'body',
-            required: true,
-          schema:{}
-        }
-    */
+    create: async (req, res) => {
+        /*
+            #swagger.tags = ["Flights"]
+            #swagger.summary = "Create Flight"
+            #swagger.parameters['body'] = {
+                in: 'body',
+                required: true,
+                schema: {
+                }
+            }
+        */
 
-    const result = await Flights.updateOne({ _id: req.params.id }, req.body, {
-      new: true,
-      runValidators: true,
-    });
+        // req.body.createdId = req.user._id
 
-    res.status(202).send({
-      error: false,
-      result,
-    });
-  },
+        const data = await Flight.create(req.body)
 
-  deleteFlight: async (req,res) => {
-    /*
-        #swagger.tags = ["Flights"]
-        #swagger.summary = "Delete Flight"
-    */
+        res.status(201).send({
+            error: false,
+            data
+        })
+    },
 
-    const { deletedCount } = await Flights.deleteOne({ _id: req.params.id });
+    read: async (req, res) => {
+        /*
+            #swagger.tags = ["Flights"]
+            #swagger.summary = "Get Single Flight"
+        */
 
-    res.status(deletedCount ? 204 : 404).send({
-      error: !deletedCount,
-    });
-  },
+        const data = await Flight.findOne({ _id: req.params.id })
 
-  
-};
+        res.status(200).send({
+            error: false,
+            data
+        })
+
+    },
+
+    update: async (req, res) => {
+        /*
+            #swagger.tags = ["Flights"]
+            #swagger.summary = "Update Flight"
+            #swagger.parameters['body'] = {
+                in: 'body',
+                required: true,
+                schema: {
+                }
+            }
+        */
+
+        const data = await Flight.updateOne({ _id: req.params.id }, req.body, { runValidators: true })
+
+        res.status(202).send({
+            error: false,
+            data,
+            new: await Flight.findOne({ _id: req.params.id })
+        })
+
+    },
+
+    delete: async (req, res) => {
+        /*
+            #swagger.tags = ["Flights"]
+            #swagger.summary = "Delete Flight"
+        */
+
+        const data = await Flight.deleteOne({ _id: req.params.id })
+
+        res.status(data.deletedCount ? 204 : 404).send({
+            error: !data.deletedCount,
+            data
+        })
+
+    },
+}
