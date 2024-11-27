@@ -9,7 +9,8 @@ const { mongoose } = require("../configs/dbConnection");
 const FlightsSchema = new mongoose.Schema(
   {
     flightNumber: {
-      type: Number,
+      type: String,
+      trim:true,
       required: true,
       unique: true,
     },
