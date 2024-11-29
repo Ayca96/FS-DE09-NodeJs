@@ -11,17 +11,17 @@ const router = require("express").Router();
 // auth:
 router.use("/auth", require("./auth"));
 // user:
-router.use("/user", require("./user"));
+router.use("/users", require("./user"));
 // token:
-router.use("/token", require("./token"));
+router.use("/tokens", require("./token"));
 
 // car:
-router.use("/car", require("./car"));
+router.use("/cars", require("./car"));
 // reservation:
-router.use("/reservation", require("./reservation"));
+router.use("/reservations", require("./reservation"));
 
 // document:
-router.use("/document", require("./document"));
+router.use("/documents", require("./document"));
 
 /* ------------------------------------------------------- */
 module.exports = router;
