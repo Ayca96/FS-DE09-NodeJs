@@ -108,6 +108,10 @@ module.exports = {
             }
         */
 
+    passwordValidation(req?.body?.password);
+    delete req.body.isAdmin
+
+
     //? Yetkisiz kullanıcının başka bir kullanıcıyı yönetmesini engelle (sadece kendi verileri):
     if (!req.user.isAdmin && ( req.params.id !== req.user._id)){ 
       res.errorStatusCode= 401

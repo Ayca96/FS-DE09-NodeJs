@@ -20,11 +20,15 @@ module.exports = {
             `
         */
 
+    let customFilter = {};
+    if (!req.user.isAdmin || !req.user.isStaff)
+      customFilter = { userId: req.user._id };
+
     const data = await res.getModelList(Reservation);
 
     res.status(200).send({
       error: false,
-      details: await res.getModelListDetails(Reservation),
+      details: await res.getModelListDetails(Reservation, customFilter),
       data,
     });
   },
@@ -42,6 +46,12 @@ module.exports = {
             }
         */
 
+    if (!req.user.isAdmin || !req.user.isStaff) {
+      req.body.userId = req.user._id;
+    } else if (!req.body.userId) {
+      req.body.userId = req.user._id;
+    }
+
     const data = await Reservation.create(req.body);
 
     res.status(201).send({
@@ -56,6 +66,10 @@ module.exports = {
             #swagger.summary = "Get Single Reservation"
         */
 
+    let customFilter = {};
+    if (!req.user.isAdmin || !req.user.isStaff) {
+      customFilter = { userId: req.user._id };
+    }
 
     const data = await Reservation.findOne({ _id: req.params.id });
 

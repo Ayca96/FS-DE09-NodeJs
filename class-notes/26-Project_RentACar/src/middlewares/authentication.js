@@ -28,6 +28,8 @@ module.exports = async (req, res, next) => {
                 req.user = data
             })
         }
+        req.body.createdId = req.user._id;
+        req.body.updatedId = req.user._id;
     }
 
         next()

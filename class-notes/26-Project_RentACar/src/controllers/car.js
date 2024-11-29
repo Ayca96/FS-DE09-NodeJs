@@ -21,6 +21,10 @@ module.exports = {
             `
         */
 
+    // dont show cars which are not avaliable
+    let customFilter = { isAvailable: true };
+    if (req.user.isAdmin || req.user.isStaff) customFilter = {};
+
     const data = await res.getModelList(Car);
 
     res.status(200).send({
@@ -43,6 +47,9 @@ module.exports = {
             }
         */
 
+    // req.body.updatedId = req.user._id
+    // req.body.createdId = req.user._id
+
     const data = await Car.create(req.body);
 
     res.status(201).send({
@@ -56,7 +63,6 @@ module.exports = {
             #swagger.tags = ["Cars"]
             #swagger.summary = "Get Single Car"
         */
-
 
     const data = await Car.findOne({ _id: req.params.id });
 
