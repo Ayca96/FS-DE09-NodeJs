@@ -72,3 +72,10 @@ UserSchema.plugin(uniqueValidator, {
 
 /* ------------------------------------------------------- */
 module.exports = mongoose.model("User", UserSchema);
+
+
+//Mongoose'da bir şema tanımlarken unique: true özelliği kullanılır. Ancak, bu özellik aslında bir doğrulama (validation) sağlamaz; yalnızca MongoDB seviyesinde bir benzersizlik dizini (unique index) oluşturur. mongoose-unique-validator, bu eksikliği tamamlar ve uygulama seviyesinde benzersizlik doğrulaması sağlar. Yani, aynı benzersiz değeri kaydetmeye çalıştığınızda hata döndürür.
+
+// Kullanıcı dostu hata mesajları sağlar.
+// Aynı benzersiz anahtarla birden fazla belge eklenmesini önler.
+// Doğrulama sürecini hem uygulama seviyesinde hem de veritabanı seviyesinde daha güvenilir hale getirir.
