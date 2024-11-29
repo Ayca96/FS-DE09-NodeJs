@@ -96,7 +96,11 @@ module.exports = {
         */
 
     //? Yetkisiz kullanıcının başka bir kullanıcıyı yönetmesini engelle (sadece kendi verileri):
-    if (!req.user.isAdmin) req.params.id = req.user._id;
+    if (!req.user.isAdmin && ( req.params.id !== req.user._id)){ 
+      res.errorStatusCode= 401
+      throw new Error ('You can not update someone else')
+    } 
+
     const data = await User.updateOne({ _id: req.params.id }, req.body, {
       runValidators: true,
     });

@@ -13,6 +13,7 @@
 /* ------------------------------------------------------- */
 
 const { mongoose } = require("../configs/dbConnection");
+const emailValidation = require("../helpers/emailValidation");
 const passwordEncrypt = require("../helpers/passwordEncrypt");
 const uniqueValidator = require("mongoose-unique-validator");
 // User Model:
@@ -30,7 +31,7 @@ const UserSchema = new mongoose.Schema(
       trim: true,
       required: true,
       set: (password) => passwordEncrypt(password),
-      // selected:false
+      // select:false
     },
 
     email: {
@@ -39,11 +40,7 @@ const UserSchema = new mongoose.Schema(
       required: [true, "An Email address is required"],
       unique: [true, "There is this email. Email field must be unique"],
       validate: [
-        (email) => {
-          const regexEmailCheck =
-            /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-          return regexEmailCheck.test(email);
-        },
+        (email) => emailValidation(email),
         "Email format is not valid",
       ],
     },
@@ -72,3 +69,9 @@ UserSchema.plugin(uniqueValidator, {
 
 /* ------------------------------------------------------- */
 module.exports = mongoose.model("User", UserSchema);
+
+//Mongoose'da bir şema tanımlarken unique: true özelliği kullanılır. Ancak, bu özellik aslında bir doğrulama (validation) sağlamaz; yalnızca MongoDB seviyesinde bir benzersizlik dizini (unique index) oluşturur. mongoose-unique-validator, bu eksikliği tamamlar ve uygulama seviyesinde benzersizlik doğrulaması sağlar. Yani, aynı benzersiz değeri kaydetmeye çalıştığınızda hata döndürür.
+
+// Kullanıcı dostu hata mesajları sağlar.
+// Aynı benzersiz anahtarla birden fazla belge eklenmesini önler.
+// Doğrulama sürecini hem uygulama seviyesinde hem de veritabanı seviyesinde daha güvenilir hale getirir.
