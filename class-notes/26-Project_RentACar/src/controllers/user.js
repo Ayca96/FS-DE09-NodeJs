@@ -6,6 +6,7 @@
 
 const User = require("../models/user");
 const passwordValidation = require("../helpers/passwordValidation");
+
 module.exports = {
   list: async (req, res) => {
     /*
@@ -21,7 +22,13 @@ module.exports = {
             `
         */
 
-    const data = await res.getModelList(User);
+
+    const customFilter = {}
+    if(!req.user.isAdmin){
+      customFilter={isAdmin:false}
+    }
+
+    const data = await res.getModelList(User,customFilter);
 
     res.status(200).send({
       error: false,
