@@ -4,6 +4,7 @@
 ------------------------------------------------------- */
 // Middleware: permissions
 const message = "Your account is not active. Please contact support.";
+const CustomError = require('../errors/customError')
 
 module.exports = {
   isLogin: (req, res, next) => {
