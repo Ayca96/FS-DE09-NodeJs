@@ -23,10 +23,11 @@ module.exports = {
         */
 
 
-    const customFilter = {}
+    let customFilter = {}
     if(!req.user.isAdmin){
       customFilter={isAdmin:false}
     }
+    
 
     const data = await res.getModelList(User,customFilter);
 
@@ -55,6 +56,11 @@ module.exports = {
             }
         */
     passwordValidation(req?.body?.password);
+    req.body.isAdmin=false;
+    req.body.isStaff= false;
+    req.body.isStaff =req.user,isAdmin ?req.body.isStaff : false
+
+    
     const data = await User.create(req.body);
 
     res.status(201).send({
