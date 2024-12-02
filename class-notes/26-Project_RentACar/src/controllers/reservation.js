@@ -24,7 +24,13 @@ module.exports = {
     if (!req.user.isAdmin || !req.user.isStaff)
       customFilter = { userId: req.user._id };
 
-    const data = await res.getModelList(Reservation);
+   
+    const data = await res.getModelList(Reservation, customFilter, [
+      { path: "userId", select: "username firstName lastName" },
+      { path: "carId", select: "brand model" },
+      { path: "createdId", select: "username" },
+      { path: "updatedId", select: "username" },
+    ]);
 
     res.status(200).send({
       error: false,
@@ -45,6 +51,8 @@ module.exports = {
                 }
             }
         */
+
+    //if user is not admin or not staff
 
     if (!req.user.isAdmin || !req.user.isStaff) {
       req.body.userId = req.user._id;
