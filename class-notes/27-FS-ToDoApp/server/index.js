@@ -22,7 +22,10 @@ require('./src/configs/dbConnection')()
 app.use(express.json())
 
 
-//
+//CORS : npm i cors  CORS, tarayıcının farklı kaynaklar arasında veri alışverişine izin vermesi için kullanılan bir güvenlik mekanizmasıdır.
+
+const cors = require('cors')
+app.use(cors({origin:'http://localhost:3000'}))
 
 
 //* Routes:
