@@ -5,6 +5,8 @@
 // Car Controller:
 
 const Car = require("../models/car");
+const dateValidation = require("../helpers/dateValidation");
+const Reservation = require('../models/reservation')
 
 module.exports = {
   list: async (req, res) => {
@@ -25,12 +27,32 @@ module.exports = {
     let customFilter = { isAvailable: true };
     if (req.user.isAdmin || req.user.isStaff) customFilter = {};
 
-    const data = await res.getModelList(Car);
+    // URL?startDate=2025-01-01&&endDate=2025-01-09
+
+    const { startDate, endDate } = req.query;
+    //console.log(startDate,endDate);
+
+    // isValid Date
+    dateValidation(startDate, endDate);
+
+    // db sd < q ed , db ed > q sd cakisan reservations döndürür
+
+    const reservedCarIds = await Reservation.find({
+      startDate: {$lte : endDate}, 
+      endDate: {$gte : startDate},
+      model:model
+    },{carId:1, _id:0  }).distinct('carId')
+
+    //const cars = await Car.find({_id: {$nin: reservedCarIds}})
+    customFilter._id ={$nin: reservedCarIds}
+
+    const data = await res.getModelList(Car, customFilter);
 
     res.status(200).send({
       error: false,
       details: await res.getModelListDetails(Car),
       data,
+   
     });
   },
 
