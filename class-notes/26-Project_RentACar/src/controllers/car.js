@@ -43,6 +43,8 @@ module.exports = {
       model:model
     },{carId:1, _id:0  }).distinct('carId')
 
+   
+
     //const cars = await Car.find({_id: {$nin: reservedCarIds}})
     customFilter._id ={$nin: reservedCarIds}
 

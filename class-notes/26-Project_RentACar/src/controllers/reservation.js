@@ -4,6 +4,9 @@
 ------------------------------------------------------- */
 // Reservation Controller:
 const Reservation = require("../models/reservation");
+const dateValidation= require('../helpers/dateValidation.js')
+const Car= require('../models/car.js')
+const CustomError= require('../errors/customError.js')
 
 module.exports = {
   list: async (req, res) => {
@@ -60,11 +63,52 @@ module.exports = {
       req.body.userId = req.user._id;
     }
 
+
+
+    const [start, end, reservedDays] = dateValidation(req.body?.startDate, req.body?.endDate)
+
+    //check if cae reserved in requested dates
+    const isReserved = await Reservation.find({
+      carId: req.body.carId,
+      startDate: {$lte : req.body?.endDate}, 
+      endDate: {$gte : req.body?.startDate},
+     
+    })
+
+    
+    if(isReserved){
+      throw new CustomError('The car is already reserved for the given dates',400)
+    }
+
+    // check if user reserved any car in requested dates
+    const userReservationInDates= await Reservation.findOne({
+      userId:req.body.userId,
+      startDate:{$lte:req.body?.endDate},
+      endDate:{$gte:req.body?.startDate}
+    })
+
+    // dont allow to make another reservation under same user
+    if(userReservationInDates){
+      throw new CustomError('The user already reserved another car for the given dates',400)
+    }
+
+    const dailyCost= await Car.findOne({_id:req.body?.carId},{_id:0, pricePerDay:1})
+    .then((car)=>Number(car.pricePerDay))
+    req.body.amount=reservedDays * dailyCost
+    
+    //const carInfo = await Car.findOne({_id: req.body?.carId}, { _id: 0, pricePerDay: 1 });
+    //const dailyCost = Number(carInfo.pricePerDay)
+    
+    console.log(carInfo);
+    
+    console.log(start, end, reservedDays);
+    
     const data = await Reservation.create(req.body);
 
     res.status(201).send({
       error: false,
       data,
+      isReserved
     });
   },
 
