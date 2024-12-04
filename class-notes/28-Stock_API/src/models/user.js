@@ -65,6 +65,12 @@ const UserSchema = new mongoose.Schema(
   }
 );
 
+UserSchema.pre("save", function (next) {
+  console.log("Pre-save run!");
+ console.log(this);
+ 
+  //next();
+});
 
 /* ------------------------------------------------------- */
 module.exports = mongoose.model("User", UserSchema);
