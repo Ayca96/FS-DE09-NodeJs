@@ -16,7 +16,7 @@ const FirmSchema = new mongoose.Schema(
       unique: true,
     },
     phone: {
-      // normalde number ama database de string tutariz database sismesin diye.
+      // normalde type number ama database de string tutariz database sismesin diye.
       type: String,
       trim: true,
       unique: true,
