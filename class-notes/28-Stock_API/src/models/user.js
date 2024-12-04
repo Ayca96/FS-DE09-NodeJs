@@ -65,11 +65,22 @@ const UserSchema = new mongoose.Schema(
   }
 );
 
-UserSchema.pre("save", function (next) {
-  console.log("Pre-save run!");
- console.log(this);
+UserSchema.pre("save", function (next) { // database kaydetmeden hemen önce calisir.
+//console.log("Pre-save run!");
+ //console.log(this);
+
+ const data = this;
+
+ //Email Control with Regex:
+
+ const isEmailValidated= data.email ? /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(data.email) : true
+
+ if(!isEmailValidated){
+ // throw new Error('Email is not validated')
+ next(new Error('Email is not validated')) // ErrorHandler middleware ine yönlendirmek icin kullaniyoruz.
+ }
  
-  //next();
+  next();
 });
 
 /* ------------------------------------------------------- */
