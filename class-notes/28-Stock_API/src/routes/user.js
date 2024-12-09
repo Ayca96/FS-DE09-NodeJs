@@ -4,21 +4,22 @@
 ------------------------------------------------------- */
 const router = require('express').Router()
 /* ------------------------------------------------------- */
+// routes/user:
 
-//  routes/user:
-
-const user= require('../controllers/user')
+const user = require('../controllers/user')
+const permissions = require('../middlewares/permissions')
 
 // URL: /users
 
 router.route('/')
-.get(user.list)
-.post(user.create)
+    .get(permissions.isLogin, user.list)
+    .post(user.create)
 
 router.route('/:id')
-.get(user.read)
-.put(user.update)
-.patch(user.update)
-.delete(user.delete)
+    .get(permissions.isLogin, user.read)
+    .put(permissions.isLogin, user.update)
+    .patch(permissions.isLogin, user.update)
+    .delete(permissions.isAdmin, user.delete)
 
+/* ------------------------------------------------------- */
 module.exports = router
