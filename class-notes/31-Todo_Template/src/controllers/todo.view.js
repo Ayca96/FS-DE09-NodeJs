@@ -4,6 +4,11 @@
 ------------------------------------------------------- */
 //Model
 const Todo = require('../models/todo')
+const PRIORITIES={
+    '-1':'Low',
+    '0':'Normal',
+    '1':'High'
+}
 
 module.exports = {
     list: async (req, res) => {
@@ -11,7 +16,7 @@ module.exports = {
         // const result = await Todo.findAll()
         const result = await Todo.findAndCountAll()
 
-        res.render('index', {count:result.count, todos:result.rows})
+        res.render('index', {count:result.count, todos:result.rows, priorities:PRIORITIES})
     },
 
     create: async (req, res) => {
