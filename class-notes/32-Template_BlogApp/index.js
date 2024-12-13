@@ -18,6 +18,28 @@ app.use(
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+
+//Change Delimiter
+/*require('ejs')
+ejs.delimiter='#'
+ejs.openDelimiter='{'
+ejs.closeDelimiter='}'*/
+
+//Templates
+//$ npm i ejs
+//<% %> Default Delimiter
+app.set('view engine', 'ejs')
+
+
+app.set('view engine ', 'ejs');
+app.set('view options', {
+ // delimeter: '#',
+  openDelimiter: '{',
+  closeDelimiter: '}'
+})
+
+app.set('views','./public')
+
 // Connect to MongoDB with Mongoose:
 require("./src/dbConnection");
 
