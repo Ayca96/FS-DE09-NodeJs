@@ -4,7 +4,6 @@
 ------------------------------------------------------- */
 
 const BlogPost = require("../../models/blogPostModel");
-const BlogCategory= require('../../models/blogCategoryModel')
 
 // ------------------------------------------
 // BlogPost
@@ -12,18 +11,14 @@ const BlogCategory= require('../../models/blogCategoryModel')
 
 module.exports = {
   list: async (req, res) => {
-    const data = await res.getModelList(BlogPost,{published:true}, "blogCategoryId");
-    const categories = await BlogCategory.find()
-   
-    //List recent 3 posts
-    const recentPosts = await BlogPost.find().sort({createdAt:"desc"}).limit(3)
+    const data = await res.getModelList(BlogPost,{}, "blogCategoryId");
 
-    //Get Page details
- 
-    const details = await res.getModelListDetails(BlogPost,{published:true})
-
-
-    res.render('index',{categories, posts:data, recentPosts, details})
+    res.status(200).send({
+      error: false,
+      count: data.length,
+      details: await res.getModelListDetails(BlogPost),
+      result: data,
+    });
   },
 
   create: async (req, res) => {
@@ -43,7 +38,10 @@ module.exports = {
       "blogCategoryId",
     ); // get Primary Data
 
-    res.render('postRead',{post:data})
+    res.status(200).send({
+      error: false,
+      result: data,
+    });
   },
 
   update: async (req, res) => {

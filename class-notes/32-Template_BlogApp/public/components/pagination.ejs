@@ -1,0 +1,13 @@
+<nav class="blog-pagination" aria-label="Pagination">
+  <!-- <a class="btn btn-outline-primary rounded-pill" href="#">1</a> -->
+  <!-- <a class="btn btn-outline-secondary rounded-pill">2</a> -->
+
+  {% for(index in details.pages.list) { %}
+  <a class="btn rounded-pill  {%=  details.pages.list[index] == details.pages.current  ? 'btn-outline-primary' : 'btn-outline-secondary' %} "
+      href="#" >
+      {%= details.pages.list[index] %}
+  </a>
+  {% } %}
+
+</nav>
+<p class="text-end p-2 border-top">Total {%= details.totalRecords %} Posts</p>

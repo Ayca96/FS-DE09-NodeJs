@@ -4,7 +4,7 @@
 ------------------------------------------------------- */
 
 const BlogPost = require("../../models/blogPostModel");
-const BlogCategory= require('../../models/blogCategoryModel')
+const BlogCategory = require("../../models/blogCategoryModel");
 
 // ------------------------------------------
 // BlogPost
@@ -12,18 +12,17 @@ const BlogCategory= require('../../models/blogCategoryModel')
 
 module.exports = {
   list: async (req, res) => {
-    const data = await res.getModelList(BlogPost,{published:true}, "blogCategoryId");
+
+    // list all published posts
+    const data = await res.getModelList(BlogPost, { published: true }, "blogCategoryId");
+    // list all categories
     const categories = await BlogCategory.find()
-   
-    //List recent 3 posts
-    const recentPosts = await BlogPost.find().sort({createdAt:"desc"}).limit(3)
+    // List recent 3 posts
+    const recentPosts = await BlogPost.find().sort({ createdAt: "desc" }).limit(3)
+    // Get page details
+    const details = await res.getModelListDetails(BlogPost, { published: true })
 
-    //Get Page details
- 
-    const details = await res.getModelListDetails(BlogPost,{published:true})
-
-
-    res.render('index',{categories, posts:data, recentPosts, details})
+    res.render('index', { categories, posts: data, recentPosts, details})
   },
 
   create: async (req, res) => {
@@ -48,18 +47,13 @@ module.exports = {
 
   update: async (req, res) => {
     // const data = await BlogPost.findByIdAndUpdate(req.params.postId, req.body, { new: true }) // return new-data
-    const data = await BlogPost.updateOne(
-      { _id: req.params.postId },
-      req.body,
-      { runValidators: true },
-    );
+    if (req.method == 'POST') {
 
-    res.status(202).send({
-      error: false,
-      body: req.body,
-      result: data, // update infos
-      newData: await BlogPost.findOne({ _id: req.params.postId }),
-    });
+      const data = await BlogPost.updateOne({ _id: req.params.postId }, req.body, { runValidators: true });
+    
+    } else {
+      res.render('postForm')
+    }
   },
 
   delete: async (req, res) => {

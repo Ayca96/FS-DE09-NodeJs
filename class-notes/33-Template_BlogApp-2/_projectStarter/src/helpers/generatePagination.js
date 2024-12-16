@@ -4,7 +4,8 @@ module.exports = function generatePagination(
   next,
   totalPages,
 ) {
-  let pagesList = []; /// [4,5,6]
+  // 5
+  let pagesList = []; // --> [4, 5, 6]
 
   // Previous page
   if (previous) {
@@ -24,7 +25,6 @@ module.exports = function generatePagination(
     if (!pagesList.includes(current - 2)) {
       pagesList = [current - 2, ...pagesList];
     }
- 
   }
 
   // Add appropriate pages at the end
@@ -32,7 +32,6 @@ module.exports = function generatePagination(
     if (!pagesList.includes(current + 2)) {
       pagesList.push(current + 2);
     }
-    
   }
 
   if (!pagesList?.length) return false;
