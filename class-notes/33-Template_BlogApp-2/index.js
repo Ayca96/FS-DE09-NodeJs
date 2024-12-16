@@ -48,8 +48,15 @@ require("./src/dbConnection");
 // Searching&Sorting&Pagination:
 app.use(require("./src/middlewares/queryHandler"));
 
+//Ejs te globale degisken atama yöntemi.
+app.use((req,res,next)=>{
+  res.locals.user= req.session?.user
+  next()
+})
+
 // StaticFiles:
 app.use("/assets", express.static("./public/assets"));
+app.use("/tinymce", express.static("./node_modules/tinymce"));
 
 // HomePage:
 app.all("/", (req, res) => {
